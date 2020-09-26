@@ -21,7 +21,7 @@ from .views import index
 #importa o arquivo 'views' da aplicação 'chart'
 from plot_chart import views
 
-
+# 'urlpatterns' será utilizado para encontrar a URL desejada em ordem de busca sequencial 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),

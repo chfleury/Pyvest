@@ -6,12 +6,14 @@
 
 {% block scripts %}
 <script>
+// a função getElementById retorna a referência do elemento através do seu ID
 var ctx = document.getElementById("productsChart");
 
-//transforma texto em objeto javascript e salva no 'names' e no 'prices' 
+// transforma texto em objeto javascript e salva no 'names' e no 'prices' 
 var names = JSON.parse('{{ names|safe }}');
 var prices = JSON.parse('{{ prices|safe }}');
 
+// modelo de gráfico de linha do chart.js 
 var productsChart = new Chart(ctx, {
     type: 'line',
     data: {
