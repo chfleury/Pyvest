@@ -1,5 +1,4 @@
 from django.db import models
-from __future__ import unicode_literals
 
 #cria o modelo, cada atributo do modelo representa um campo do banco de dados    
 class Plot_Chart(models.Model):
