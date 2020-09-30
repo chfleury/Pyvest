@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Python Investimentos</title>
+
+    <link
+      rel="shortcut icon"
+      href="../static/images/logo.png"
+      type="image/png"
+    />
+    <link rel="stylesheet" href="../static/css/bootstrap.css" />
+    <link rel="stylesheet" href="../static/css/registrar.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&amp;family=Poppins:wght@400;600&amp;display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <header>
+    <div class="page-header">
+      <div class="top-bar-container">
+        <script>
+          document.write(
+            ' <a id="back" href=\'' +
+              document.referrer +
+              '\'> <img src="../static/images/back.svg" alt=""/></a>'
+          );
+        </script>
+        <!--<a id="back" href="/entrar"
+          ><img src="../static/images/back.svg" alt=""
+        /></a> -->
+        <img id="logo" src="../static/images/logo.png" alt="Logo" />
+      </div>
+      <div class="header-content">
+        <h1>
+          Seja bem-vindo à melhor plataforma de investimentos para iniciantes!
+        </h1>
+      </div>
+    </div>
+
+    <!-- {% for usuario in usuarios %}
+    <div><p>{{usuario.nome}}</p></div>
+    {% endfor %} -->
+  </header>
+  <header></header>
+  <main>
+    <form method="POST" action="/registrar">
+      <div class="login-form">
+        {% csrf_token %} {% for field in form %}
+        <!-- {{ field.label_tag }} -->
+        {% if forloop.counter == 1 %}
+        <label for="id_username">Usuário:</label>
+        {% elif forloop.counter == 2 %}
+        <label for="id_password1">Senha:</label>
+        {% elif forloop.counter == 3 %}
+        <label for="id_password2">Confirmar Senha:</label>
+        {% endif %} {{ field }} {% if forloop.counter == 3 %}
+        <small style="color: grey"
+          ><ul>
+            <li>
+              A senha deve conter ao menos 8 caracteres e ao menos uma letra
+            </li>
+            <li>Não pode ser uma senha comum</li>
+            <li>Não pode ser muito semelhante ao nome de Usuário</li>
+          </ul></small
+        >
+        {% endif %} {% for error in field.errors %} {% if error == "The password
+        is too similar to the username." %}
+        <p style="color: red">A senha é muito semelhante ao Usuário.</p>
+        {% endif %} {% if error == "This password is too short. It must contain
+        at least 8 characters." %}
+        <p style="color: red">A senha deve conter ao menos 8 caracteres.</p>
+        {% endif %} {% if error == "This password is too common." %}
+        <p style="color: red">A senha é muito comum.</p>
+        {% endif %} {% if error == "The two password fields didn’t match." %}
+        <p style="color: red">As senhas não são iguais.</p>
+        {% endif %} {% if error == "This password is entirely numeric." %}
+        <p style="color: red">A senha requer ao menos uma letra.</p>
+        {% endif %} {% endfor %} {% endfor %}
+        <input type="submit" value="Registrar" id="registrar-button" />
+      </div>
+    </form>
+  </main>
+</html>

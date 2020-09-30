@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Python Investimentos</title>
+
+    <link
+      rel="shortcut icon"
+      href="../static/images/logo.png"
+      type="image/png"
+    />
+    <link rel="stylesheet" href="../static/css/bootstrap.css" />
+    <link rel="stylesheet" href="../static/css/entrar.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&amp;family=Poppins:wght@400;600&amp;display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <header>
+    <div class="header-content">
+      <img src="../static/images/logo.png" alt="Logo" />
+      <h1>
+        <strong>Pyvest,</strong>
+        <br />
+        Sua plataforma intuitiva de investimentos.
+      </h1>
+    </div>
+    <!-- {% for usuario in usuarios %}
+    <div><p>{{usuario.nome}}</p></div>
+    {% endfor %} -->
+  </header>
+  <main>
+    <!-- <form method="POST" action="/login">
+      <div class="login-form">
+        {% csrf_token %} {{form}}
+        <input type="submit" type="Login" value="Entrar" id="login-button" />
+      </div>
+    </form> -->
+
+    <!--     <form action="/entrar" id="login" method="POST">-->
+    <form id="login" method="POST">
+      {% csrf_token %}
+      <div class="login-form">
+        <label for="username">Usuário:</label>
+        <input name="username" id="username" required />
+
+        <label for="password">Senha:</label>
+        <input name="password" id="password" required type="password" />
+        {% for message in messages %}
+        <p id="error">{{ message }}</p>
+        {% endfor %}
+        <input type="submit" type="Login" value="Entrar" id="login-button" />
+      </div>
+    </form>
+    <div class="register">
+      <p>Ainda não possui uma conta?</p>
+      <a href="./registrar">Registre-se!</a>
+    </div>
+    <!-- {% for o in teste %}
+    <tr class="{% cycle 'row1' rowvalue2 'row3' %}">
+      ...
+    </tr>
+    {% endfor %} -->
+  </main>
+</html>

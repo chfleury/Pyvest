@@ -1,0 +1,39 @@
+body {
+  margin: 0 3.2rem;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+main h1 {
+  font-style: Archivo;
+  margin: auto;
+  /* text-transform: uppercase; */
+}
+
+.integrantes .integrante {
+  width: 80vw;
+}
+
+.integrantes .integrante strong {
+  display: block;
+}
+
+.integrantes .integrante img {
+  border-radius: 50%;
+  width: 20vw;
+  margin: 0.8rem 0.8rem 0 0;
+}
+
+.integrantes .integrante p {
+  display: inline;
+  font-size: 0.8rem;
+}
