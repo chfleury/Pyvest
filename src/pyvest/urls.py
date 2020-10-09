@@ -25,7 +25,7 @@ from plot_chart import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
-    url(r'^products/$', views.products, name='plot_chart'),
+    path('products/', views.products),
 ]
 
 

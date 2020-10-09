@@ -1,7 +1,7 @@
 {% extends "base_chart.html" %}
 
 {% block content %}
-  <canvas id="productsChart" width="300" height="300"></canvas>
+  <canvas id="productsChart" width="400" height="150" ></canvas>
 {% endblock %}
 
 {% block scripts %}
@@ -12,6 +12,7 @@ var ctx = document.getElementById("productsChart");
 // transforma texto em objeto javascript e salva no 'names' e no 'prices' 
 var names = JSON.parse('{{ names|safe }}');
 var prices = JSON.parse('{{ prices|safe }}');
+var market_caps = JSON.parse('{{ market_caps|safe }}');
 
 // modelo de gráfico de linha do chart.js 
 var productsChart = new Chart(ctx, {
