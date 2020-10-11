@@ -1,0 +1,114 @@
+{% load static%}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Seus investimentos{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    
+  </head>
+  <body>
+    
+    <! -- Barra de navegação -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Python Investimentos</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Página Inicial<span class="sr-only">(current)</span></a>
+          </li>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Sobre nós</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Investimentos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Carrinho</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Cadastre-se</a>
+          </li>
+        </ul>
+      </div>
+    </nav>    
+    
+    
+
+    <div class="list-group ml-5 mr-5 mb-2">
+      <a href="#" class="list-group-item list-group-item-action">
+        <div class="código ml-auto">
+            PTR4
+        </div>
+        <div class="nome mr-auto">
+            <h4>PETRÓLEO BRASILEIRO S.A. - PETROBRÁS <span class="badge badge-danger mr-auto">-2,83%</span></h4>
+        </div>
+      </a>
+      <a href="#" class="list-group-item list-group-item-action">
+        <div class="código ml-auto">
+            COGN3
+        </div>
+        <div class="nome mr-auto">
+            <h4>COGNA EDUCAÇÃO S.A. <span class="badge badge-success mr-auto">+3,59%</span></h4>
+        </div>
+      </a>
+      <a href="#" class="list-group-item list-group-item-action">
+        <div class="código ml-auto">
+            BIDI4
+        </div>
+        <div class="nome mr-auto">
+            <h4>BANCO INTER S.A.    <span class="badge badge-danger mr-auto">-1,23%</span></h4>
+        </div>
+      </a>
+      <a href="#" class="list-group-item list-group-item-action">
+        <div class="código ml-auto">
+            SANB11
+        </div>
+        <div class="nome mr-auto">
+            <h4>BANCO SANTANDER (BRASIL) S.A.<span class="badge badge-danger ml-auto">-6,41%</span></h4>
+        </div>
+      </a>
+      <a href="#" class="list-group-item list-group-item-action">
+        <div class="código ml-auto">
+            MRVE3
+        </div>
+        <div class="nome mr-auto">
+            <h4>MRV ENGENHARIA E PARTICIPAÇÕES S.A.<span class="badge badge-success mr-auto">+8,98%</span></h4>
+        </div>
+      </a>
+      <a href="#" class="list-group-item list-group-item-action">
+        <div class="código ml-auto">
+            HBOR3
+        </div>
+        <div class="nome mr-auto">
+            <h4>HELBOR EMPREENDIMENTOS S.A.<span class="badge badge-danger mr-auto">-3,61%</span></h4>
+        </div>
+      </a>
+      <a href="#" class="list-group-item list-group-item-action">
+        <div class="código ml-auto">
+            MGLU3
+        </div>
+        <div class="nome mr-auto">
+            <h4>MAGAZINE LUIZA S.A.<span class="badge badge-success mr-auto">+1,07%</span></h4>
+        </div>
+      </a>
+    </div>
+     
+
+    
+    
+
+    
+
+
+    <script src="{% static 'static/js/bootstrap.js' %}"></script>
+  </body>
+</html>
