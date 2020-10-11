@@ -31,7 +31,7 @@ urlpatterns = [
     path('', index),
     path('products/', views.products),
     path('meus_investimentos/', inv_lista_views.meus_investimentos_lista),
-    path('meus_investimentos/stocks', inv_views.meus_investimentos),
+    path('meus_investimentos/stocks/', inv_views.meus_investimentos),
 ]
 
 
