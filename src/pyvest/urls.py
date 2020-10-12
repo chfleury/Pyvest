@@ -29,9 +29,9 @@ from usuario_investimentos_lista import views as inv_lista_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
-    path('products/', views.products),
     path('meus_investimentos/', inv_lista_views.meus_investimentos_lista),
     path('meus_investimentos/stocks/', inv_views.meus_investimentos),
+    path('meus_investimentos/stocks/grafico/', views.products),
 ]
 
 
