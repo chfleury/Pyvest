@@ -1,34 +1,32 @@
 from django.shortcuts import render
 import json
 from .models import Plot_Chart
-
 import requests
 
-url = "https://api.hgbrasil.com/finance/stock_price?key=68df2e2f&symbol=CIEL3"
+def fazerRequisicao(symbol, key, nome_do_campo):
 
-payload = {}
-headers = {
-  'Cookie': '__cfduid=dcad4a377fb91994eb56d1a27bb7fbeca1598974673'
-}
+    url = f'https://api.hgbrasil.com/finance/stock_price?&key={key}&symbol={symbol}&fields={nome_do_campo}'
 
-response = requests.request("GET", url, headers=headers, data = payload)
+    dados = requests.get(url)
 
+    resposta_geral = dados.json()
+    somente_resultados = resposta_geral["results"]
+    valor_do_campo_desejado = somente_resultados["PETR4"]
+    print(json.dumps(valor_do_campo_desejado))
 
+    return valor_do_campo_desejado
+for_chart = float(fazerRequisicao('PETR4', 'dc9e7785', 'price'))
+print(for_chart)
+def products(request):
 
-def products(response):
-
-    #recebe os dados do banco de dados
-    queryset = Plot_Chart.objects.all()
-    names = [obj.name for obj in queryset]
-    prices = [int(obj.price) for obj in queryset]
-    market_caps = [int(obj.market_cap) for obj in queryset]
-
-    context = {
+    #context = {
         #transforma o objeto python em uma string JSON
-        'names': json.dumps(names),
-        'prices': json.dumps(prices),
-        'market_caps': json.dumps(market_caps)
-    }
+        #'names': json.dumps(names),
+        #'prices': json.dumps(prices),
+    #    'for_chart' : for_chart,
+    #}
 
     #renderiza o template com o contexto do dicionário dado, nesse caso é o 'context'
-    return render(response, 'plot_chart/products.html', context)
+    return render(request, 'plot_chart/products.html', {
+      'for_chart': for_chart,
+    })

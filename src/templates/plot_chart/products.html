@@ -2,46 +2,41 @@
 
 {% block content %}
   <div style="max-width: 930px; max-height: 1050px;">
-    <canvas id="productsChart"></canvas>
+    <canvas id="myChart"></canvas>
   </div>
 {% endblock %}
 
 {% block scripts %}
-<script>
-// a função getElementById retorna a referência do elemento através do seu ID
-var ctx = document.getElementById("productsChart");
 
-// transforma texto em objeto javascript e salva no 'names' e no 'prices' 
-var names = JSON.parse('{{ names|safe }}');
-var prices = JSON.parse('{{ prices|safe }}');
-var market_caps = JSON.parse('{{ market_caps|safe }}');
+    <script>
+    var ctx = document.getElementById('myChart').getContext('2d');
 
-// modelo de gráfico de linha do chart.js 
-var productsChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: names,
-        datasets: [{
-            label: 'PTR4',
-            data: prices,
-            backgroundColor: [
-                'rgba(31, 85, 20, 0.5)',
-            ],
-            borderColor: [
-                'rgba(31, 85, 20,1)',
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Price'],
+            datasets: [{
+                label: 'PETR4',
+                data:[{{ for_chart|safe }}],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                ],
+                borderWidth: 1
             }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
         }
-    }
-});
-</script>
+    });
+    </script>
+
 {% endblock %}
