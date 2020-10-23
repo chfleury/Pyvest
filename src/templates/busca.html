@@ -1,0 +1,17 @@
+{% load static %}
+<html>
+<head>
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'fa/css/all.min.css' %}">
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+</head>
+<body>
+    <form action="/busca" method="POST">
+        {% csrf_token %}
+        <label for="busca"> Busca:</label>
+        <input type="text" id="busca" name="busca"><br><br>
+        <input type="submit" value="Pesquisar">
+    </form>
+</body>
+
+</html>
