@@ -75,48 +75,115 @@ def load_hash(acoes):
         row += 1 
 
 def request_api(symbolList, key):
-  # blz
     listaDados = []
     for i in symbolList:
         url = f'https://api.hgbrasil.com/finance/stock_price?key={key}&symbol={i}'
 
         print(url)
         dados = requests.get(url)
-        listaDados.append(dados)
-        print(dados.text)
         test = json.loads(dados.text)
         price = test['results'][i]['market_cap']
-        print(price)
+        listaDados.append(test['results'][i])
+
         print('-----------------------')
     return listaDados
+#
+# Pilha (lista) do carrinho temp
+
+# blz testa ai vc a busca ver se ta funcionando direito 
+#blz
+# quer ir discord? to lá
+# eai
+# ta dando um  Not Found: /favicon.ico]
+# sabe oq e iso?
+
+carrinho_temp = []
+
+def adicionar_carrinho_temp(acao):
+    carrinho_temp.append(acao)
+
+def remover_carrinho_temp():
+    if len(carrinho_temp) > 0:
+        carrinho_temp.pop(-1)
 
 # teste_requisicao('ITSA3', '3eafa921')
 # Create your views here.
+context = {}
+
 def busca(request):
+    print(carrinho_temp)
+
     if request.method == 'POST':
-        busca = request.POST['busca']
-        # ta igual eu acho
-        print(busca)
-        print('1')
-        acoes = get_stock()
-        print('2')
-        hash_init()
-        print('3')
-        load_hash(acoes) 
-        print('4')
+        busca = request.POST.get('busca')
+        # Nessa view temos 3 situações de POST:
+        # 1: Se o usuário fez uma busca
+        # 2: Se o usuário desfez a ultima adição do carrinho 
+        # 3: Se o usuário adicionou alguma ação ao carrinho temporário
 
-        key = get_key(busca)
-        print('5')
+        # Nesse if verificamos se ele tentou fazer busca ou não
+        if busca is not None:
+        # Caso ele tenha feito uma busca, executamos o códico da busca (Caso 1)
+            acoes = get_stock()
+            
+            hash_init()
+            load_hash(acoes) 
 
-        if key > 22:
-            print("Nenhum valor com esta letra.")
-            exit()  
-        print('6')
-        symbolList = hash_table[key].search(busca)
+            key = get_key(busca)
 
-        request_api(symbolList, '3eafa921')
-        
-        return redirect('/busca')
+            if key > 22:
+                print("Nenhum valor com esta letra.")
+                return render(request, '../templates/busca.html', {})
+
+            symbolList = set(hash_table[key].search(busca))
+
+            context['acoes'] = request_api(symbolList, '3eafa921')
+            return render(request, '../templates/busca.html', context)
+        else:
+        # Caso contrário, ele ainda pode ter ou adicionado ao carrinho,
+        # ou desfeito a ação
+            desfazer = request.POST.get('desfazer')
+
+            # Checa se usuario desfez a ação, se sim, entramos no caso 2
+            # e executamos o códico de desfazer a ação
+            if desfazer is not None and desfazer:
+                contextDesfazer = {}
+                contextDesfazer['acoes'] = context['acoes']
+                contextDesfazer['desfeito'] = True
+                
+                remover_carrinho_temp()
+
+                return render(request, '../templates/busca.html', contextDesfazer)
+
+            else:
+            # Caso ele não tenha desfeito, significa que esse POST
+            # foi utilizado para adicionar uma ação ao carrinho (Caso 3)
+            # temporário, o que é feito a seguir
+                contextCarrinho = {}
+                contextCarrinho['acoes'] = context['acoes']
+                contextCarrinho['snack'] = True
+
+                acao = {}
+                acao['market_time'] = {}
+                acao['symbol'] = request.POST.get('symbol')
+                acao['name'] = request.POST.get('name')
+                acao['region'] = request.POST.get('region')
+                acao['currency'] = request.POST.get('currency')
+                acao['market_time']['open'] = request.POST.get('open')
+                acao['market_time']['close'] = request.POST.get('close')
+                acao['market_time']['timezone'] = request.POST.get('timezone')
+                acao['market_cap'] = request.POST.get('market_cap')
+                acao['price'] = request.POST.get('price')
+                acao['change_percent'] = request.POST.get('change_percent')
+                acao['updated_at'] = request.POST.get('updated_at')
+
+                print(acao)
+                adicionar_carrinho_temp(acao)
+
+                print(contextCarrinho)
+
+                return render(request, '../templates/busca.html', contextCarrinho)
+
+
     else:
         return render(request, '../templates/busca.html')
  
