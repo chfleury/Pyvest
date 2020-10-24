@@ -2,27 +2,56 @@
 
 {% block content %}
   <div style="max-width: 930px; max-height: 1050px;">
-    <canvas id="myChart"></canvas>
+    <canvas id="Chart_Prices_and_Change"></canvas>
+    <canvas id="Chart_Market"></canvas>
   </div>
 {% endblock %}
 
 {% block scripts %}
 
     <script>
-    var ctx = document.getElementById('myChart').getContext('2d');
+    var ctx = document.getElementById('Chart_Prices_and_Change').getContext('2d');
 
-    var myChart = new Chart(ctx, {
+    var Chart_Prices_and_Change = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Price'],
+            labels: ["Prices", "Change per Cent"],
             datasets: [{
-                label: 'PETR4',
-                data:[{{ for_chart|safe }}],
+                label: [{{ label_for_chart1|safe }}],
+                data:[{{ price_for_chart1|safe }},{{ change_for_chart1|safe }}],
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 0, 0, 0.5)',
+                    'rgba(255, 0, 0, 0.5)',
                 ],
                 borderColor: [
-                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 0, 0, 1)',
+                    'rgba(255, 0, 0, 1)',
+                ],
+                borderWidth: 1
+            },
+            {
+                label: [{{ label_for_chart2|safe }}],
+                data:[{{ price_for_chart2|safe }},{{ change_for_chart2|safe }}],
+                backgroundColor: [
+                    'rgba(0, 0, 255, 0.5)',
+                    'rgba(0, 0, 255, 0.5)',
+                ],
+                borderColor: [
+                    'rgba(0, 0, 255, 1)',
+                    'rgba(0, 0, 255, 1)',
+                ],
+                borderWidth: 1
+            },
+            {
+                label: [{{ label_for_chart3|safe }}],
+                data:[{{ price_for_chart3|safe }},{{ change_for_chart3|safe }}],
+                backgroundColor: [
+                    'rgba(0, 255, 0, 0.5)',
+                    'rgba(0, 255, 0, 0.5)',
+                ],
+                borderColor: [
+                    'rgba(0, 255, 0, 1)',
+                    'rgba(0, 255, 0, 1)',
                 ],
                 borderWidth: 1
             }]
@@ -39,4 +68,58 @@
     });
     </script>
 
+    <script>
+
+    var ctx = document.getElementById('Chart_Market').getContext('2d');
+
+    var Chart_Market = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ["Market Cap"],
+            datasets: [{
+                label: [{{ label_for_chart1|safe }}],
+                data:[{{ market_for_chart1|safe }}],
+                backgroundColor: [
+                    'rgba(255, 0, 0, 0.5)',
+                ],
+                borderColor: [
+                    'rgba(255, 0, 0, 1)',
+                ],
+                borderWidth: 1
+            },
+            {
+                label: [{{ label_for_chart2|safe }}],
+                data:[{{ market_for_chart2|safe }}],
+                backgroundColor: [
+                    'rgba(0, 0, 255, 0.5)',
+                ],
+                borderColor: [
+                    'rgba(0, 0, 255, 5)',
+                ],
+                borderWidth: 1
+            },
+            {
+                label: [{{ label_for_chart3|safe }}],
+                data:[{{ market_for_chart3|safe }}],
+                backgroundColor: [
+                    'rgba(0, 255, 0, 0.5)',
+                ],
+                borderColor: [
+                    'rgba(0, 255, 0, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+    </script>
+    
 {% endblock %}
