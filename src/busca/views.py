@@ -4,6 +4,8 @@ import csv
 from django.http import HttpResponse
 import requests 
 import json 
+import os
+
 
 class Node:
     def __init__(self, name, key):
@@ -111,6 +113,8 @@ def remover_carrinho_temp():
 context = {}
 
 def busca(request):
+    path = os.path.join(
+      '..', 'templates', 'busca.html')
     print(carrinho_temp)
 
     if request.method == 'POST':
@@ -132,12 +136,12 @@ def busca(request):
 
             if key > 22:
                 print("Nenhum valor com esta letra.")
-                return render(request, '../templates/busca.html', {})
+                return render(request, path, {})
 
             symbolList = set(hash_table[key].search(busca))
 
-            context['acoes'] = request_api(symbolList, '3eafa921')
-            return render(request, '../templates/busca.html', context)
+            context['acoes'] = request_api(symbolList, 'dc9e7785')
+            return render(request, path, context)
         else:
         # Caso contrário, ele ainda pode ter ou adicionado ao carrinho,
         # ou desfeito a ação
@@ -152,7 +156,7 @@ def busca(request):
                 
                 remover_carrinho_temp()
 
-                return render(request, '../templates/busca.html', contextDesfazer)
+                return render(request, path, contextDesfazer)
 
             else:
             # Caso ele não tenha desfeito, significa que esse POST
@@ -181,11 +185,11 @@ def busca(request):
 
                 print(contextCarrinho)
 
-                return render(request, '../templates/busca.html', contextCarrinho)
+                return render(request, path, contextCarrinho)
 
 
     else:
-        return render(request, '../templates/busca.html')
+        return render(request, path)
  
     
     # return render(request,'busca.html')
