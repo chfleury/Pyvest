@@ -23,5 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
     path('',include('busca.urls')),
+    path('',include('carrinho.urls')),
 ]
 

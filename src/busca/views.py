@@ -99,15 +99,84 @@ def request_api(symbolList, key):
 # ta dando um  Not Found: /favicon.ico]
 # sabe oq e iso?
 
-carrinho_temp = []
 
-def adicionar_carrinho_temp(acao):
+#TODO: fazer o carrinho pilha
+#joga aqui pae
+class NodePilha:
+    def __init__(self, symbol, name, region, currency, time_open, time_close, timezone, market_cap, price, change_percent, updated_at):
+        self.symbol = symbol
+        self.name = name
+        self.region = region
+        self.currency = currency
+        self.open = time_open
+        self.close = time_close
+        self.timezone = timezone
+        self.market_cap = market_cap
+        self.price = price
+        self.change_percent = change_percent
+        self.updated_at = updated_at
+        self.next = None
+
+class Pilha:
+    #construtor
+    def __init__(self):
+        self.top = None
+        self._size = 0
+    
+
+    #insere um elemento na pilha
+    def push(self, symbol, name, region, currency, time_open, time_close, timezone, market_cap, price, change_percent, updated_at):
+        node = NodePilha(symbol, name, region, currency, time_open, time_close, timezone, market_cap, price, change_percent, updated_at)
+        node.next = self.top
+        self.top = node
+        self._size += 1
+
+
+   #remove o elemento do topo da pilha
+    def pop(self):
+        if self._size > 0:
+            node = self.top
+            self.top = node.next
+            node.next = None
+            self._size -= 1
+            return node
+        raise IndexError("a pilha esta vazia")
+    
+    
+    #retorna o topo sem remover
+    def peek(self):
+        if self._size > 0:
+            return self.top.data
+        raise IndexError("a pilha esta vazia")
+
+    
+    # retorna o tamanha da lista
+    def __len__(self):
+        return self._size
+    
+    #representação de como enxergar a pilha 
+    def __repr__(self):
+        r = ""
+        pointer = self.top
+        while(pointer):
+            r = r +str(pointer.name) + "\n"
+            pointer = pointer.next
+        return r
+
+    def __str__(self):
+        return self.__repr__()
+
+carrinho_temp = Pilha()
+
+
+#------------------------------------------
+""" def adicionar_carrinho_temp(acao):
     carrinho_temp.append(acao)
 
 def remover_carrinho_temp():
     if len(carrinho_temp) > 0:
         carrinho_temp.pop(-1)
-
+ """
 # teste_requisicao('ITSA3', '3eafa921')
 # Create your views here.
 context = {}
@@ -153,9 +222,9 @@ def busca(request):
                 contextDesfazer = {}
                 contextDesfazer['acoes'] = context['acoes']
                 contextDesfazer['desfeito'] = True
-                
-                remover_carrinho_temp()
-
+                #TODO: alterar..
+                carrinho_temp.pop()
+                print(carrinho_temp)
                 return render(request, path, contextDesfazer)
 
             else:
@@ -165,47 +234,51 @@ def busca(request):
                 contextCarrinho = {}
                 contextCarrinho['acoes'] = context['acoes']
                 contextCarrinho['snack'] = True
-
-                acao = {}
+                
+                # pega os respectivos valores e utiliza como parametro
+                carrinho_temp.push(
+                    request.POST.get('symbol'),
+                    request.POST.get('name'),
+                    request.POST.get('region'),
+                    request.POST.get('currency'),
+                    request.POST.get('open'),
+                    request.POST.get('close'),
+                    request.POST.get('timezone'),
+                    request.POST.get('market_cap'),
+                    request.POST.get('price'),
+                    request.POST.get('change_percent'),
+                    request.POST.get('updated_at')
+                )
+                '''
+                acao = {} 
                 acao['market_time'] = {}
-                acao['symbol'] = request.POST.get('symbol')
-                acao['name'] = request.POST.get('name')
-                acao['region'] = request.POST.get('region')
-                acao['currency'] = request.POST.get('currency')
-                acao['market_time']['open'] = request.POST.get('open')
-                acao['market_time']['close'] = request.POST.get('close')
-                acao['market_time']['timezone'] = request.POST.get('timezone')
-                acao['market_cap'] = request.POST.get('market_cap')
-                acao['price'] = request.POST.get('price')
-                acao['change_percent'] = request.POST.get('change_percent')
-                acao['updated_at'] = request.POST.get('updated_at')
-
+                acao['symbol'] = request.POST.get('symbol'),
+                acao['name'] = request.POST.get('name'),
+                acao['region'] = request.POST.get('region'),
+                acao['currency'] = request.POST.get('currency'),
+                acao['market_time']['open'] = request.POST.get('open'),
+                acao['market_time']['close'] = request.POST.get('close'),
+                acao['market_time']['timezone'] = request.POST.get('timezone'),
+                acao['market_cap'] = request.POST.get('market_cap'),
+                acao['price'] = request.POST.get('price'),
+                acao['change_percent'] = request.POST.get('change_percent'),
+                acao['updated_at'] = request.POST.get('updated_at'),
+                
                 print(acao)
-                adicionar_carrinho_temp(acao)
+                #TODO: alterar...
+                carrinho_temp.push(acao)
+                '''
+                print(carrinho_temp)
 
                 print(contextCarrinho)
-
                 return render(request, path, contextCarrinho)
-
-
     else:
         return render(request, path)
- 
-    
-    # return render(request,'busca.html')
-    """  context = [acoes] """
-    '''
-    return HttpResponse(hash_table)
-    '''
+# TODO:fazer com que o contextCarrinho seja passado tbm para essa funcao
 
-""" 
-if __name__ == "__main__":
-    acoes = get_stock()
-    hash_init()
-    load_hash(acoes) 
-    pesquisa = input("Digite o nome a ser pesquisado: ") 
-    key = get_key(pesquisa)
-    if key > 22:
-        print("Nenhum valor com esta letra.")
-        exit()  
-    hash_table[key].search(pesquisa)  """
+def redirectcarrinho(request):
+    if request.method == 'GET':
+        return redirect('/carrinho')
+
+
+
