@@ -109,6 +109,10 @@ footer p {
     justify-content: center;
   }
 
+  .integrantes .integrante strong {
+    display:block;
+  }
+
   main .integrantes .integrante {
     width: 26vw;
     margin: auto;
@@ -142,5 +146,11 @@ footer p {
 
   footer p {
     margin: 0 0 0 3.2rem;
+  }
+}
+
+@media (min-width: 1080) {
+  .integrantes .integrante strong {  
+    display: inline;
   }
 }

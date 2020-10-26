@@ -1,5 +1,6 @@
 from django.shortcuts import render
 
+# criar uma linked list pros investimentos
 # criar um botão para cada investimento com o código e o nome de cada um
 # usar a API pra pegar o dado do dia daquele investimento
 
