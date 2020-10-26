@@ -33,5 +33,8 @@ urlpatterns = [
     path('', index),
     path('',include('busca.urls')),
     path('',include('carrinho.urls')),
+    path('meus_investimentos/', inv_lista_views.meus_investimentos_lista),
+    path('meus_investimentos/stocks/', inv_views.meus_investimentos),
+    path('meus_investimentos/stocks/grafico/', views.products),
 ]
 

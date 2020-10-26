@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'busca.apps.BuscaConfig',
-]
+    'plot_chart',
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
