@@ -1,0 +1,89 @@
+{% load static%}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Meus investimentos{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    
+  </head>
+  <body>
+    
+    <! -- Barra de navegação -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Python Investimentos</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Página Inicial<span class="sr-only">(current)</span></a>
+          </li>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Sobre nós</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="http://127.0.0.1:8000/meus_investimentos/">Meus Investimentos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Carrinho</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Cadastre-se</a>
+          </li>
+        </ul>
+      </div>
+    </nav>    
+    
+    
+    <! -- Lista de botões das classes de investimentos -->
+    <div class="list-group ml-5 mr-5 mb-2">
+      <a href="#" class="list-group-item list-group-item-action">
+        <div class="nome mr-auto">
+            <h4>
+                CURRENCIES
+                <span class="badge badge-danger">0</span>
+            </h4>
+        </div>
+      </a>
+      <a href="stocks" class="list-group-item list-group-item-action">
+        <div class="nome mr-auto">
+            <h4>
+                STOCKS
+                <span class="badge badge-success">7</span>
+            </h4>
+        </div>
+      </a>
+      <a href="#" class="list-group-item list-group-item-action">
+        <div class="nome mr-auto">
+            <h4>
+                BITCOIN
+                <span class="badge badge-danger">0</span>
+            </h4>
+        </div>
+      </a>
+      <a href="#" class="list-group-item list-group-item-action">
+        <div class="nome mr-auto">
+            <h4>
+                TAXES
+                <span class="badge badge-danger">0</span>
+            </h4>
+        </div>
+    </div>
+     
+
+    
+    
+
+    
+
+
+    <script src="{% static 'static/js/bootstrap.js' %}"></script>
+  </body>
+</html>
