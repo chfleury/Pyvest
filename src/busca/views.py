@@ -6,13 +6,14 @@ import requests
 import json 
 import os
 
-
 class Node:
     def __init__(self, name, key):
         self.name = name
         self.key = key
         self.next = None
+
 hash_table = []
+
 # Lista formada por nodes de palavras e chaves de cada ação
 class LinkedList:
     def __init__(self):
@@ -89,15 +90,6 @@ def request_api(symbolList, key):
 
         print('-----------------------')
     return listaDados
-#
-# Pilha (lista) do carrinho temp
-
-# blz testa ai vc a busca ver se ta funcionando direito 
-#blz
-# quer ir discord? to lá
-# eai
-# ta dando um  Not Found: /favicon.ico]
-# sabe oq e iso?
 
 
 #TODO: fazer o carrinho pilha
@@ -123,7 +115,6 @@ class Pilha:
         self.top = None
         self._size = 0
     
-
     #insere um elemento na pilha
     def push(self, symbol, name, region, currency, time_open, time_close, timezone, market_cap, price, change_percent, updated_at):
         node = NodePilha(symbol, name, region, currency, time_open, time_close, timezone, market_cap, price, change_percent, updated_at)
@@ -168,17 +159,6 @@ class Pilha:
 
 carrinho_temp = Pilha()
 
-
-#------------------------------------------
-""" def adicionar_carrinho_temp(acao):
-    carrinho_temp.append(acao)
-
-def remover_carrinho_temp():
-    if len(carrinho_temp) > 0:
-        carrinho_temp.pop(-1)
- """
-# teste_requisicao('ITSA3', '3eafa921')
-# Create your views here.
 context = {}
 
 def busca(request):
@@ -270,7 +250,7 @@ def busca(request):
                 '''
                 print(carrinho_temp)
 
-                print(contextCarrinho)
+                #print(contextCarrinho)
                 return render(request, path, contextCarrinho)
     else:
         return render(request, path)
