@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'busca.apps.BuscaConfig',
     'plot_chart',
     ]
+    'entrar_registrar',
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

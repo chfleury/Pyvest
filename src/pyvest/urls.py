@@ -18,6 +18,10 @@ from django.urls import path
 from django.conf.urls import url
 from .views import index
 from django.urls import include
+from django.urls import path, include
+from .views import index
+from .views import home
+from .views import sobre
 
 
 #importa o arquivo 'views' da aplicação 'chart'
@@ -36,5 +40,8 @@ urlpatterns = [
     path('meus_investimentos/', inv_lista_views.meus_investimentos_lista),
     path('meus_investimentos/stocks/', inv_views.meus_investimentos),
     path('meus_investimentos/stocks/grafico/', views.products),
+    path('home', home),
+    path('sobre', sobre),
+    path('', include('entrar_registrar.urls')),
 ]
 

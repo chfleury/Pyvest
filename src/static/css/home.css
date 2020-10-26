@@ -1,0 +1,118 @@
+body {
+  height: 100vh;
+  width: 100vw;
+  padding: 0 3.2rem;
+
+  font-family: Archivo;
+
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+    url(https://i.postimg.cc/j584FvRh/1.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+header img {
+  display: block;
+  margin: auto;
+}
+
+header ul {
+  padding: 0;
+  margin: auto;
+  list-style-type: none;
+  text-align: center;
+}
+
+header ul li {
+  /* display: inline-block; */
+  align-content: center;
+  align-self: center;
+  text-transform: uppercase;
+  font-size: 24px;
+}
+
+header ul li a {
+  color: var(--color-line-in-white);
+  text-decoration: none;
+  font-size: 1.6rem;
+  padding: 5px 20px;
+  font-family: poppins;
+  text-transform: uppercase;
+}
+
+header ul li a:hover {
+  background: #fff;
+  color: #333;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+main h1 {
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+
+  text-align: center;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 2rem;
+}
+
+main h1 span {
+  color: var(--logo);
+}
+
+main a {
+  margin: auto;
+
+  font-family: Poppins;
+  border: 1px solid #fff;
+  padding: 10px 25px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 14px;
+  margin-top: 20px;
+  display: inline-block;
+  color: #fff;
+}
+
+main a:hover {
+  background: #fff;
+  color: #333;
+}
+
+@media (min-width: 700px) {
+  body {
+    padding: 0;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+  }
+
+  header ul li {
+    display: inline-block;
+  }
+
+  main h1 {
+    margin: 0 20%;
+    padding: 5.5rem 0 7rem 0;
+    font-size: 6rem;
+  }
+
+  main a {
+    font-size: 2.4rem;
+  }
+}
