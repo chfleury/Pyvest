@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
 from .views import index
+from django.urls import include
+
 
 #importa o arquivo 'views' da aplicação 'chart'
 from plot_chart import views
@@ -29,12 +31,7 @@ from usuario_investimentos_lista import views as inv_lista_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
-    path('meus_investimentos/', inv_lista_views.meus_investimentos_lista),
-    path('meus_investimentos/stocks/', inv_views.meus_investimentos),
-    path('meus_investimentos/stocks/grafico/', views.products),
+    path('',include('busca.urls')),
+    path('',include('carrinho.urls')),
 ]
-
-
-
-
 

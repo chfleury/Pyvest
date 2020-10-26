@@ -1,0 +1,53 @@
+
+<!-- <body>
+    <h1>Carrinho</h1>
+
+</body> -->
+<!DOCTYPE html>
+<html lang="pt_br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Python Investimentos</title>
+  </head>
+  <body>
+    <header>
+      
+      <link rel="stylesheet" href="../static/css/carrinho.css" />
+      
+<!--       <div class = "pesquisa">
+        <input type="text" id="pesquisa">
+      </div> -->
+      <link
+        href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&amp;family=Poppins:wght@400;600&amp;display=swap"
+        rel="stylesheet"
+      />
+
+    </header>
+
+    <main>
+      
+      <div class="tabela-investimentos">
+        <!-- colocar dados aqui  -->
+        {% block content %}
+          
+        {% endblock %}
+      </div>
+
+      <div class="direita">
+        <div class="total">
+          <p class = "cima">Valor total do carrinho</p>
+          <strong class = "baixo"> R$ 2868,00 </strong>
+        </div>
+
+        <div class="botoes">
+          <button id="investir"onclick="botao_investir()">Investir Tudo</button>
+          <button id="excluir" onclick="botao_excluir()">Excluir Tudo</button>
+        </div>
+        <script src="../static/js/carrinho.js"></script>
+      </div>
+    </main>
+
+    
+  </body>
+</html>

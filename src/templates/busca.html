@@ -1,0 +1,158 @@
+<!doctype html>
+{% load static %}
+<html lang="pt-br">
+
+<head>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<link href="main.css" rel="stylesheet" id="bootstrap-css">
+<script src="main.css"></script>
+<script src="main.css"></script>
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'fa/css/all.min.css' %}">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="main.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+        
+    <div class="container">
+        <a href=><img class="imagem" src= height="100"  > </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+            <ul class="navbar-nav active">
+                <li class="nav-item m-auto">
+                    <a class="nav-link" href=>Página Inicial</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href=>Login</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href=>Cadastre-se</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href=>info <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href=>Logout</a>
+                </li>
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-xl" placeholder="Search...">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary btn-number">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <a class="btn btn-success btn-sm ml-3" href=>
+                    <i class="fa fa-shopping-cart"></i> Carrinho
+                    <span class="badge badge-light">6</span>
+                </a>
+            </form>
+        </div>
+    </div>
+   
+</nav>
+<section class="jumbotron text-center">
+  <div class="container">
+      <h1 class="jumbotron-heading"><img class="imagem" src= > </h1>
+   </div>
+</section>
+    <script src="../static/js/busca.js"></script> 
+
+    
+
+    {% if snack %}
+      <div id="snackbar">
+        <p>Ação adicionada ao carrinho</p>
+        <form action="/busca" method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="desfazer" value="true">
+          <input type="submit" value="Desfazer">
+        </form>
+        
+      </div> 
+      <script>showSnackbar()</script>
+    {% endif %}
+
+    {% if desfeito %}
+    <div id="snackbar">
+      <p>Ação desfeita</p>
+    </div> 
+
+    <script>showSnackbar()</script>
+  {% endif %}
+    
+    <form action="/busca" method="POST">
+        {% csrf_token %}
+        <label for="busca"> Busca:</label>
+        <input type="text" id="busca" name="busca"><br><br>
+        <input type="submit" value="Pesquisar">
+    </form>
+    
+    <!-- <button class="btn btn-lg" 
+    onclick="showSnackbar()"> 
+ Show Snackbar 
+</button>  -->
+    <main>
+      <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col"> </th>
+                    <th scope="col">Productos</th>
+                    <th scope="col">Código</th>
+                    <th scope="col" class="text-center">Quantidade>
+                    <th scope="col" class="text-right">Preço</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+              {% for acao in acoes %}
+              <tr>
+               
+                <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                <td> {{acao.name}} </td>
+                <td>Símbolo: {{acao.symbol}}</td>
+                <td><input class="form-control" type="text" value=" editar a quantidade " /></td>
+                <td class="text-right">Preço: R${{acao.price}}</td>
+                <td class="text-right"><button class="btn btn-sm btn-danger"><i class=" editar o ícone de investtir "></i> </button> </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+            <div class="add-carrinho-div">
+          
+              <form id="add-carrinho" action="/busca" method="POST" >
+                {% csrf_token %}
+                <input type="hidden" name="symbol" value="{{acao.symbol}}">
+                <input type="hidden" name="name" value="{{acao.name}}">
+                <input type="hidden" name="region" value="{{acao.region}}">
+                <input type="hidden" name="currency" value="{{acao.currency}}">
+                <input type="hidden" name="open" value="{{acao.market_time.open}}">
+                <input type="hidden" name="close" value="{{acao.market_time.close}}">
+                <input type="hidden" name="timezone" value="{{acao.market_time.timezone}}">
+                <input type="hidden" name="market_cap" value="{{acao.market_cap}}">
+                <input type="hidden" name="price" value="{{acao.price}}">
+                <input type="hidden" name="change_percent" value="{{acao.change_percent}}">
+                <input type="hidden" name="updated_at" value="{{acao.updated_at}}">
+                <input type="submit" value="Adicionar ao carrinho">
+              </form>
+     
+            </div>
+      </div>
+   
+    </main>
+    <form action="/busca/redirect" method="GET">
+      <Button type ="submit" formmethod="GET">Ir para o carrinho</Button>
+    </form>
+    
+</body>
+
+</html>

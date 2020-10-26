@@ -1,0 +1,137 @@
+/* olá */
+
+body {
+    background-color: #f0f0f7;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+  }
+  
+  header #botaousr {
+  
+    background-color: #f0f0f7;
+    border-radius: 50%;
+    border-color: #f0f0f7;
+    width: 50px;
+    height: 50px;
+    overflow: visible; 
+    justify-content: center;
+  }
+  header #usuario {
+  
+    justify-content: center;
+    bottom: 0;
+    width: 100%;
+    
+  }
+  
+  /* header #pesquisa.input{
+      width: 12rem;
+      height: 2.5rem;
+      margin-right: .8rem;
+  } */
+  
+  main {
+    gap: 5rem;
+    display:flex;
+    justify-content: center;
+  }
+  
+  main .tabela-investimentos {
+    background-color:#20BD67;
+    border: solid #c1bccc 1px;
+    border-radius: .8rem;
+    height:300px;
+    overflow:scroll;/* ou auto?  */  
+  }
+  /* main .tabela-investimentos .item {
+    width: 60rem;
+    height: 8rem;
+  
+    border: 0;
+    border-radius: 1rem;
+    cursor: pointer;
+  
+    font: 700 1rem Archivo;
+  
+    background-color: #20BD67;
+    color: black;
+    margin-top: 2.8rem;
+    transition: background 0.2s;
+  }
+  main .tabela-investimentos .item:hover{
+    background-color: #04d361;
+  } */
+  /* main .tabela-investimentos .item #investimento{
+  text-align: left;
+  }
+  main .tabela-investimentos .item #valor{
+    text-align: right;
+    font-size: 30px;
+  } */
+  
+  main .direita {
+    display: flex;
+    flex-direction: column;
+    
+  }
+  
+  main .direita .botoes{
+   display:flex;
+   gap: 1.2rem;
+  }
+  
+  
+  main .direita .botoes #investir{
+    width: 13rem;
+    height: 4rem;
+  
+    border: 0;
+    border-radius: 0.4rem;
+    cursor: pointer;
+  
+    font: 700 1.4rem Archivo;
+  
+    background-color: #04d361;
+    color: black;
+    margin-top: 2.8rem;
+    transition: background 0.2s;
+  }
+  /* f8f8fc */
+  main .direita .botoes #investir:hover{
+    background-color: #20bd67;
+    
+  }
+  
+  main .direita .botoes #excluir {
+    width: 13rem;
+    height: 4rem;
+  
+    border: 0;
+    border-radius: 0.4rem;
+    cursor: pointer;
+  
+    font: 700 1.4rem Archivo;
+  
+    background-color: #dc3545;
+    color: black;
+    margin-top: 2.8rem;
+    transition: background 0.2s;
+  }
+  
+  main .direita .botoes #excluir:hover {
+    background-color:red;
+  
+  }
+  main .direita .total .cima{
+    border-bottom: 2px double;
+    border-color: black;
+  /*   margin:0px 0px 5px 0px cima baixo direita esquerda 
+    border: 0px;
+    padding: 0px; */
+    
+    
+  }
