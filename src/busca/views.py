@@ -189,7 +189,7 @@ def busca(request):
 
             symbolList = set(hash_table[key].search(busca))
 
-            context['acoes'] = request_api(symbolList, 'dc9e7785')
+            context['acoes'] = request_api(symbolList, '34a625c3')
             return render(request, path, context)
         else:
         # Caso contrário, ele ainda pode ter ou adicionado ao carrinho,
