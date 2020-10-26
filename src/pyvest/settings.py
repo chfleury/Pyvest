@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'busca.apps.BuscaConfig',
     'plot_chart',
-    ]
     'entrar_registrar',
+    'carrinho',
 ]
 
 MIDDLEWARE = [

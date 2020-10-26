@@ -87,7 +87,7 @@ def request_api(symbolList, key):
         test = json.loads(dados.text)
         price = test['results'][i]['market_cap']
         listaDados.append(test['results'][i])
-
+        print(listaDados)
         print('-----------------------')
     return listaDados
 
@@ -202,7 +202,6 @@ def busca(request):
                 contextDesfazer = {}
                 contextDesfazer['acoes'] = context['acoes']
                 contextDesfazer['desfeito'] = True
-                #TODO: alterar..
                 carrinho_temp.pop()
                 print(carrinho_temp)
                 return render(request, path, contextDesfazer)
@@ -248,9 +247,9 @@ def busca(request):
                 #TODO: alterar...
                 carrinho_temp.push(acao)
                 '''
-                print(carrinho_temp)
+                #print(carrinho_temp)
 
-                #print(contextCarrinho)
+                print(contextCarrinho)
                 return render(request, path, contextCarrinho)
     else:
         return render(request, path)
