@@ -4,19 +4,36 @@ from django.shortcuts import render
 # criar um botão para cada investimento com o código e o nome de cada um
 # usar a API pra pegar o dado do dia daquele investimento
 
-investimentos_do_usuario = []
+investimentos_do_usuario = [] 
 
-def requisicao(symbol, key, nome_do_campo):
+class Node_Investimentos:
+    #construtor
+    def __init__(self, symbol, name):
 
-    url = f'https://api.hgbrasil.com/finance/stock_price?&key={key}&symbol={symbol}&fields={nome_do_campo}'
+        # guarda os dados
+        self.symbol = symbol
+        self.name = name
 
-    dados = requests.get(url)
+        # guarda a referência (next item)
+        self.next = None
 
-    resposta_geral = dados.json()
-    somente_resultados = resposta_geral["results"]
-    valor_do_campo_desejado = somente_resultados["PETR4"]
+class Linked_List_Investimentos:
+    #construtor
+    def __init__(self):
+        self.head = None
+        self.tail = None
 
-    return valor_do_campo_desejado
+    def output_list(self):
+        #printa o valor do node atual
+        current_node = self.head
+        
+        while current_node is not None:
+            print(current_node.symbol)
+            
+            # jump to the linked node
+            current_node = current_node.next
+            
+
 
 
 

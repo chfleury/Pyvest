@@ -29,17 +29,19 @@
       
       <div class="tabela-investimentos">
         <!-- colocar dados aqui  -->
+        {% if vazio %}
+          <h2>Carrinho Vazio</h2>
+        {% endif %}
+        
         {% for acao in acoes %}
+        <p></p> 
         <tr>
-         
           <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
           <td> {{acao.name}} </td>
           <td>Símbolo: {{acao.symbol}}</td>
-          <td><input class="form-control" type="text" value=" editar a quantidade " /></td>
           <td class="text-right">Preço: R${{acao.price}}</td>
-          <td class="text-right"><button class="btn btn-sm btn-danger"><i class=" editar o ícone de investtir "></i> </button> </td>
-          <td class="btn btn-lg btn-block btn-success text-uppercase">ADICIONAR AO CARRINHO</td>
-
+          <!-- <td class="text-right"><button class="btn btn-sm btn-danger"><i class=" editar o ícone de investtir "></i> </button> </td> -->
+          
         </tr>
         {% endfor %}
       </div>
@@ -47,6 +49,7 @@
       <div class="direita">
         <div class="total">
           <p class = "cima">Valor total do carrinho</p>
+          
           <strong class = "baixo"> R$ 2868,00 </strong>
         </div>
 

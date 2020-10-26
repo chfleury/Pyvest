@@ -85,7 +85,8 @@ def request_api(symbolList, key):
         print(url)
         dados = requests.get(url)
         test = json.loads(dados.text)
-        price = test['results'][i]['market_cap']
+        # esse price ja ta no test a gente ja manda ele pra listaDados pode
+        # price = test['results'][i]['market_cap']
         listaDados.append(test['results'][i])
         print(listaDados)
         print('-----------------------')
@@ -109,28 +110,78 @@ class NodePilha:
         self.updated_at = updated_at
         self.next = None
 
+acoesSession = []
 class Pilha:
     #construtor
     def __init__(self):
         self.top = None
         self._size = 0
     
+    
     #insere um elemento na pilha
-    def push(self, symbol, name, region, currency, time_open, time_close, timezone, market_cap, price, change_percent, updated_at):
+    def push(self, request, symbol, name, region, currency, time_open, time_close, timezone, market_cap, price, change_percent, updated_at):
         node = NodePilha(symbol, name, region, currency, time_open, time_close, timezone, market_cap, price, change_percent, updated_at)
         node.next = self.top
         self.top = node
         self._size += 1
+        
+        # a gente 
+        acoesSession.append({
+            'symbol': node.symbol,
+            'name' : node.name,
+            'region' : node.region,
+            'currency' : node.currency,
+            'time_open' : node.open,
+            'time_close' : node.close,
+            'timezone' : node.timezone,
+            'market_cap' : node.market_cap,
+            'price' : node.price,
+            'change_percent' : node.change_percent,
+            'updated_at' : node.updated_at})
+        
+        # acoesSession[-1]['symbol'] = node.symbol
+        # acoesSession[-1]['name'] = node.name
+        # acoesSession[-1]['region'] = node.region
+        # acoesSession[-1]['currency'] = node.currency
+        # acoesSession[-1]['time_open'] = node.open
+        # acoesSession[-1]['time_close'] = node.close
+        # acoesSession[-1]['timezone'] = node.timezone
+        # acoesSession[-1]['market_cap'] = node.market_cap
+        # acoesSession[-1]['price'] = node.price
+        # acoesSession[-1]['change_percent'] = node.change_percent
+        # acoesSession[-1]['updated_at'] = node.updated_at
+        
+        request.session['acoes'] = acoesSession
+        # for attr, value in node.__dict__.items():
+        #     acoesSession[-1][attr] = value
 
+        # too pensando
+        # agr tem q ver se ta la mesmo armazenado
+        # acoesSession.append(json.dumps(node))
+        # la na parte da busca
 
+        # request.session['acoes'] = acoesSession
+        request.session['testes'] = [{'teste1': 14}, {'teste':12}]
+        #pera ai vou ver no site como e q esqueci ss
+        # nao da pra botar nosso node direto na session parece
+        # tem que ser uma lista de dicionarios
+        #sei nem o q é isso,
+        # na hora de inserir o node na session
+    
    #remove o elemento do topo da pilha
-    def pop(self):
+    def pop(self, request):
         if self._size > 0:
             node = self.top
             self.top = node.next
             node.next = None
             self._size -= 1
+            # roda ai gayzao
+            acoesSession.pop()
+            request.session['acoes'] = acoesSession
+
             return node
+        #bora tentar so o push primeiro
+        
         raise IndexError("a pilha esta vazia")
     
     
@@ -162,6 +213,18 @@ carrinho_temp = Pilha()
 context = {}
 
 def busca(request):
+    try:
+        # ta funcionando
+        # 
+
+        print('---------------------')
+        print(request.session['acoes'])
+        print('---------------------')
+
+    except:
+        print('erro')
+    #botei pra printar  bora rodar agr
+
     path = os.path.join(
       '..', 'templates', 'busca.html')
     print(carrinho_temp)
@@ -202,7 +265,7 @@ def busca(request):
                 contextDesfazer = {}
                 contextDesfazer['acoes'] = context['acoes']
                 contextDesfazer['desfeito'] = True
-                carrinho_temp.pop()
+                carrinho_temp.pop(request)
                 print(carrinho_temp)
                 return render(request, path, contextDesfazer)
 
@@ -216,6 +279,7 @@ def busca(request):
                 
                 # pega os respectivos valores e utiliza como parametro
                 carrinho_temp.push(
+                    request,
                     request.POST.get('symbol'),
                     request.POST.get('name'),
                     request.POST.get('region'),
@@ -247,9 +311,9 @@ def busca(request):
                 #TODO: alterar...
                 carrinho_temp.push(acao)
                 '''
-                #print(carrinho_temp)
+                print(carrinho_temp)
 
-                print(contextCarrinho)
+                #print(contextCarrinho)
                 return render(request, path, contextCarrinho)
     else:
         return render(request, path)

@@ -45,9 +45,9 @@ body {
     border: solid #c1bccc 1px;
     border-radius: .8rem;
     height:300px;
-    overflow:scroll;/* ou auto?  */  
+    overflow:scroll;
   }
-  /* main .tabela-investimentos .item {
+/*   main .tabela-investimentos .item {
     width: 60rem;
     height: 8rem;
   

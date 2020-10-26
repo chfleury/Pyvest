@@ -1,76 +1,13 @@
-<!doctype html>
 {% load static %}
-<html lang="pt-br">
-
+<html>
 <head>
-<script src="{% static 'js/bootstrap.min.js' %}"></script>
-<link href="main.css" rel="stylesheet" id="bootstrap-css">
-<script src="main.css"></script>
-<script src="main.css"></script>
 <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 <link rel="stylesheet" href="{% static 'fa/css/all.min.css' %}">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="main.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="../static/css/busca.css" />
 
+<!-- <script src="{% static 'js/bootstrap.min.js' %}"></script> -->
 </head>
 <body>
-
-  <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
-        
-    <div class="container">
-        <a href=><img class="imagem" src= height="100"  > </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
-            <ul class="navbar-nav active">
-                <li class="nav-item m-auto">
-                    <a class="nav-link" href=s Página Inicial</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href=>Login</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href=>Cadastre-se</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href=>info <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href=>Logout</a>
-                </li>
-            </ul>
-            
-              <form action="/busca" method="POST">
-                    {% csrf_token %}
-                    <label for="busca"> Busca:</label>
-                    <input type="text" id="busca" name="busca"><br><br>
-                    <input type="submit" value="Pesquisar">
-              </form>
-            <!-- <form class="form-inline my-2 my-lg-0">
-                <div class="input-group input-group-sm">
-                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-xl" placeholder="Search...">
-                    <div class="input-group-append">
-                        <button type="button" class="btn btn-secondary btn-number">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-                <a class="btn btn-success btn-sm ml-3" href=>
-                    <i class="fa fa-shopping-cart"></i> Carrinho
-                    <span class="badge badge-light">6</span>
-                </a>
-            </form> -->
-        </div>
-    </div>
-   
-</nav>
-<section class="jumbotron text-center">
-  <div class="container">
-      <h1 class="jumbotron-heading"><img class="imagem" src= > </h1>
-   </div>
-</section>
     <script src="../static/js/busca.js"></script> 
 
     
@@ -96,151 +33,51 @@
     <script>showSnackbar()</script>
   {% endif %}
     
-    
+    <form action="/busca" method="POST">
+        {% csrf_token %}
+        <label for="busca"> Busca:</label>
+        <input type="text" id="busca" name="busca"><br><br>
+        <input type="submit" value="Pesquisar">
+    </form>
     
     <!-- <button class="btn btn-lg" 
     onclick="showSnackbar()"> 
  Show Snackbar 
 </button>  -->
     <main>
-      <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col"> </th>
-                    <th scope="col">Productos</th>
-                    <th scope="col">Código</th>
-                    <th scope="col" class="text-center">Quantidade>
-                    <th scope="col" class="text-right">Preço</th>
-                    <th> </th>
-                </tr>
-            </thead>
-            <tbody>
-              {% for acao in acoes %}
-              <tr>
-               
-                <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                <td> {{acao.name}} </td>
-                <td>Símbolo: {{acao.symbol}}</td>
-                <td><input class="form-control" type="text" value=" editar a quantidade " /></td>
-                <td class="text-right">Preço: R${{acao.price}}</td>
-                <td class="text-right"><button class="btn btn-sm btn-danger"><i class=" editar o ícone de investtir "></i> </button> </td>
-                <td class="btn btn-lg btn-block btn-success text-uppercase">ADICIONAR AO CARRINHO</td>
-            </tr>
-            {% endfor %}
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>SUBTOTAL</td>
-                <td class="text-right">255,90 €</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>DESCONTO</td>
-                <td class="text-right">6,90 €</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><strong>TOTAL</strong></td>
-                <td class="text-right"><strong>346,90 €</strong></td>
-            </tr>
-            </tbody>
-        </table>
-            <div class="add-carrinho-div">
+      {% for acao in acoes %}
+      <div class="info-acao">
+        <h2>{{acao.name}} </h2>
+        <p>Símbolo: {{acao.symbol}}</p>
+        <p>Preço: R${{acao.price}}</p>
+
+        <div class="add-carrinho-div">
           
-              <form id="add-carrinho" action="/busca" method="POST" >
-                {% csrf_token %}
-                <input type="hidden" name="symbol" value="{{acao.symbol}}">
-                <input type="hidden" name="name" value="{{acao.name}}">
-                <input type="hidden" name="region" value="{{acao.region}}">
-                <input type="hidden" name="currency" value="{{acao.currency}}">
-                <input type="hidden" name="open" value="{{acao.market_time.open}}">
-                <input type="hidden" name="close" value="{{acao.market_time.close}}">
-                <input type="hidden" name="timezone" value="{{acao.market_time.timezone}}">
-                <input type="hidden" name="market_cap" value="{{acao.market_cap}}">
-                <input type="hidden" name="price" value="{{acao.price}}">
-                <input type="hidden" name="change_percent" value="{{acao.change_percent}}">
-                <input type="hidden" name="updated_at" value="{{acao.updated_at}}">
-                <input type="submit" value="Adicionar ao carrinho">
-              </form>
-     
-            </div>
-      </div>
-      <div class="col mb-2">
-        <div class="row">
-            <div class="col-sm-12 col-md-6 text-right">
-                <button class="btn btn-lg btn-block btn-success text-uppercase">DESFAZER</button>
-            </div>
-            <form action="/busca/redirect" method="GET">
-              <Button type ="submit" formmethod="GET">Ir para o carrinho</Button>
-            </form>
+          <form id="add-carrinho" action="/busca" method="POST" >
+            {% csrf_token %}
+            <input type="hidden" name="symbol" value="{{acao.symbol}}">
+            <input type="hidden" name="name" value="{{acao.name}}">
+            <input type="hidden" name="region" value="{{acao.region}}">
+            <input type="hidden" name="currency" value="{{acao.currency}}">
+            <input type="hidden" name="open" value="{{acao.market_time.open}}">
+            <input type="hidden" name="close" value="{{acao.market_time.close}}">
+            <input type="hidden" name="timezone" value="{{acao.market_time.timezone}}">
+            <input type="hidden" name="market_cap" value="{{acao.market_cap}}">
+            <input type="hidden" name="price" value="{{acao.price}}">
+            <input type="hidden" name="change_percent" value="{{acao.change_percent}}">
+            <input type="hidden" name="updated_at" value="{{acao.updated_at}}">
+            <input type="submit" value="Adicionar ao carrinho">
+          </form>
+ 
         </div>
+        
+    
       </div>
-   
+      {% endfor %}
     </main>
-   
-
-    <!-- Footer -->
-<footer class="text-light">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3 col-lg-4 col-xl-3">
-                <h5>About</h5>
-                <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
-                <p class="mb-0">
-                    Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.
-                </p>
-            </div>
-
-            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto">
-                <h5>Informations</h5>
-                <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
-                <ul class="list-unstyled">
-                    <li><a href="">Link 1</a></li>
-                    <li><a href="">Link 2</a></li>
-                    <li><a href="">Link 3</a></li>
-                    <li><a href="">Link 4</a></li>
-                </ul>
-            </div>
-
-            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto">
-                <h5>Others links</h5>
-                <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
-                <ul class="list-unstyled">
-                    <li><a href="">Link 1</a></li>
-                    <li><a href="">Link 2</a></li>
-                    <li><a href="">Link 3</a></li>
-                    <li><a href="">Link 4</a></li>
-                </ul>
-            </div>
-
-            <div class="col-md-4 col-lg-3 col-xl-3">
-                <h5>Contact</h5>
-                <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
-                <ul class="list-unstyled">
-                    <li><i class="fa fa-home mr-2"></i> My company</li>
-                    <li><i class="fa fa-envelope mr-2"></i> email@example.com</li>
-                    <li><i class="fa fa-phone mr-2"></i> + 33 12 14 15 16</li>
-                    <li><i class="fa fa-print mr-2"></i> + 33 12 14 15 16</li>
-                </ul>
-            </div>
-            <div class="col-12 copyright mt-3">
-                <p class="float-left">
-                    <a href="#">Back to top</a>
-                </p>
-                <p class="text-right text-muted">created with <i class="fa fa-heart"></i> by <a href="https://t-php.fr/43-theme-ecommerce-bootstrap-4.html"><i>t-php</i></a> | <span>v. 1.0</span></p>
-            </div>
-        </div>
-    </div>
-</footer>
+    <form action="/busca/redirect" method="GET">
+      <Button type ="submit" formmethod="GET">Ir para o carrinho</Button>
+    </form>
     
 </body>
 
