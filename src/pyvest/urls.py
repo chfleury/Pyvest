@@ -29,8 +29,6 @@ from plot_chart import views
 
 from usuario_investimentos import views as inv_views
 
-from usuario_investimentos_lista import views as inv_lista_views
-
 # 'urlpatterns' será utilizado para encontrar a URL desejada em ordem de busca sequencial 
 urlpatterns = [
     path('admin/', admin.site.urls),
