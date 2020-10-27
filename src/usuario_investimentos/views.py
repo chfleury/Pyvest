@@ -1,15 +1,13 @@
 from django.shortcuts import render
 
-# criar uma linked list pros investimentos
 # criar um botão para cada investimento com o código e o nome de cada um
 # usar a API pra pegar o dado do dia daquele investimento
-
-investimentos_do_usuario = [] 
 
 class Node_Investimentos:
     #construtor
     def __init__(self, symbol, name):
-
+        "constructor to initiate this object"
+        
         # guarda os dados
         self.symbol = symbol
         self.name = name
@@ -24,7 +22,7 @@ class Linked_List_Investimentos:
         self.tail = None
 
     def output_list(self):
-        #printa o valor do node atual
+        "outputs the list (the value of the node, actually)"
         current_node = self.head
         
         while current_node is not None:
@@ -33,8 +31,7 @@ class Linked_List_Investimentos:
             # jump to the linked node
             current_node = current_node.next
             
-
-
+        return current_node
 
 
 def meus_investimentos(request):
