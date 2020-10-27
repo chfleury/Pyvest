@@ -16,7 +16,7 @@ def entrar(request):
         if user is not None:
             login(request, user)
             
-            return redirect('/')
+            return redirect('/busca')
         else:
             messages.error(request, 'Usuário e/ou senha incorretos.')
 

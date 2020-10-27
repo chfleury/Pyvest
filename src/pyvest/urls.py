@@ -34,12 +34,11 @@ from usuario_investimentos_lista import views as inv_lista_views
 # 'urlpatterns' será utilizado para encontrar a URL desejada em ordem de busca sequencial 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index),
+    path('', home),
     path('',include('busca.urls')),
     path('',include('carrinho.urls')),
-    path('meus_investimentos/', inv_lista_views.meus_investimentos_lista),
-    path('meus_investimentos/stocks/', inv_views.meus_investimentos),
-    path('meus_investimentos/stocks/grafico/', views.products),
+    path('meus_investimentos/', inv_views.meus_investimentos),
+    path('meus_investimentos/grafico/', views.products),
     path('home', home),
     path('sobre', sobre),
     path('', include('entrar_registrar.urls')),
