@@ -85,25 +85,41 @@
      
         {% endfor %}
       </div>
-
-      <div class="direita">
-        <div class="total">
-          <p class = "cima">VALOR TOTAL DO CARRINHO</p>
           
-          <strong class = "baixo"> R$ 2868,00 </strong>
-        </div>
+  
+        <div class="direita">
+          <div class="total">
+            <input type="hidden" name="excluir" value="excluir">
 
-        <div class="botoes">
-          <button id="investir">
-            Investir Tudo
-          </button>  
-          <button id="excluir" onclick="botao_excluir()">Excluir Tudo</button>
-        </div>
-        
+            <p class = "cima">VALOR TOTAL DO CARRINHO</p>
+            
+            <strong class = "baixo"> R$ 2868,00 </strong>
+          </div>
+  
+          <div class="botoes">
+            <form method="POST" action="/carrinho">
+              {% csrf_token %}
+              <input type="hidden" name="investir" value="investir">
+              <input type="submit"  value="Investir" id="investir" />
 
-
-        <script src="../static/js/carrinho.js"></script>
-      </div>
+            </form>
+            <form method="POST" action="/carrinho">
+              {% csrf_token %}
+              <input type="hidden" name="excluir" value="excluir">
+              <input type="submit"  value="Excluir" id="excluir" />
+            </form>
+            <!-- <button id="investir" type="submit" value="investir">
+              Investir Tudo
+            </button>  
+            <button id="excluir" type="submit" value="excluir" onclick="botao_excluir()">Excluir Tudo</button> -->
+          </div>
+          
+  
+  
+          <script src="../static/js/carrinho.js"></script>
+        </div>              
+    
+     
 
     </section>
 
