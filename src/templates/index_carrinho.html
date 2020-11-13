@@ -1,8 +1,4 @@
 {% load static%}
-<!-- <body>
-    <h1>Carrinho</h1>
-
-</body> -->
 <!DOCTYPE html>
 <html lang="pt_br">
   <head>
@@ -23,8 +19,10 @@
 
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Python Investimentos</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a href="/home" class="navbar-brand">
+        <img id="logo" src="../static/images/logo_cortado.png" alt="Logo"
+      /></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -41,8 +39,8 @@
           <li class="nav-item">
             <a class="nav-link" href="http://127.0.0.1:8000/meus_investimentos/">Meus Investimentos</a>
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/carrinho">Carrinho</a>
+          <li class="nav-item">
+            <a class="nav-link" href="/carrinho">Sair</a>
           </li>
         </ul>
       </div>
@@ -62,19 +60,8 @@
 
     </header>
 
-  <section id="back">
-    <div class="jumbotron">
-      <div class="container">
-          <div class="row">
-              <div class="col-md-6">  
-                  <h1 class="jumbotron-heading"></h1><img class="imagem" src="{% static 'images/python_investimentos_logo.png' %}" height="200" > </h1>
-              </div>
-              <div class="col-md-6">
-                <h1 class="jumbotron-heading"></h1><img class="imagem" src="{% static 'images/finance.jpeg' %}" height="200" > </h1>
-              </div>  
-          </div>
-      </div>
-    </div>
+  <section id="backs">
+  
 
     <main>
       
@@ -85,15 +72,17 @@
         {% endif %}
         
         {% for acao in acoes %}
-        <p></p> 
-        <tr>
-          <td><img src="https://dummyimage.com/50x50/fc9921/fff" /> </td>
-          <td> {{acao.name}} </td>
-          <td>Símbolo: {{acao.symbol}}</td>
-          <td class="text-right">Preço: R${{acao.price}}</td>
-          <!-- <td class="text-right"><button class="btn btn-sm btn-danger"><i class=" editar o ícone de investtir "></i> </button> </td> -->
-          
-        </tr>
+        <div class="acao">
+          <tr>
+            <td><img src="https://dummyimage.com/50x50/fc9921/fff" /> </td>
+            <td> {{acao.name}} </td>
+            <td>Símbolo: {{acao.symbol}}</td>
+            <td class="text-right">Preço: R${{acao.price}}</td>
+            <!-- <td class="text-right"><button class="btn btn-sm btn-danger"><i class=" editar o ícone de investtir "></i> </button> </td> -->
+            
+          </tr>
+        </div>
+     
         {% endfor %}
       </div>
 
@@ -106,7 +95,7 @@
 
         <div class="botoes">
           <button id="investir">
-            <a class="nav-link" href="/meus_investimentos/">Investir Tudo</a>
+            Investir Tudo
           </button>  
           <button id="excluir" onclick="botao_excluir()">Excluir Tudo</button>
         </div>
