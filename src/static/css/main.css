@@ -1,0 +1,25 @@
+#back {
+
+    background: #ffc107;
+    color: white;
+}
+
+.caixa {
+	padding: 60px 0;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+body {
+    background: url(../images/capa.webp),
+                url(../images/ruido.png),
+                linear-gradient(50deg,#ff4169,#7c26f8);
+background-attachment: fixed;
+font-family: Helvetica,Arial,sans-serif;
+}
+
+
+footer p a {
+	margin: 5px 15px;
+}
+
+

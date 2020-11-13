@@ -10,6 +10,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <title>Python Investimentos</title>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+<link href="static/css/man.css" rel="stylesheet" type="text/css">
+<script src="static/css/man.css"></script>
+<script src="main.css"></script>
+<link rel="stylesheet" href="{% static 'css/man.css' %}">
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'fa/css/all.min.css' %}">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="man.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -37,6 +48,7 @@
       </div>
     </nav> 
     <header>
+   
       
       <link rel="stylesheet" href="../static/css/carrinho.css" />
       
@@ -50,6 +62,20 @@
 
     </header>
 
+  <section id="back">
+    <div class="jumbotron">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-6">  
+                  <h1 class="jumbotron-heading"></h1><img class="imagem" src="{% static 'images/python_investimentos_logo.png' %}" height="200" > </h1>
+              </div>
+              <div class="col-md-6">
+                <h1 class="jumbotron-heading"></h1><img class="imagem" src="{% static 'images/finance.jpeg' %}" height="200" > </h1>
+              </div>  
+          </div>
+      </div>
+    </div>
+
     <main>
       
       <div class="tabela-investimentos">
@@ -61,7 +87,7 @@
         {% for acao in acoes %}
         <p></p> 
         <tr>
-          <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+          <td><img src="https://dummyimage.com/50x50/fc9921/fff" /> </td>
           <td> {{acao.name}} </td>
           <td>Símbolo: {{acao.symbol}}</td>
           <td class="text-right">Preço: R${{acao.price}}</td>
@@ -73,7 +99,7 @@
 
       <div class="direita">
         <div class="total">
-          <p class = "cima">Valor total do carrinho</p>
+          <p class = "cima">VALOR TOTAL DO CARRINHO</p>
           
           <strong class = "baixo"> R$ 2868,00 </strong>
         </div>
@@ -89,8 +115,104 @@
 
         <script src="../static/js/carrinho.js"></script>
       </div>
+
+    </section>
+
+      <section class="caixa" ><!--/Início seção recursos -->
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <img src="{% static 'images/facil.png' %}" class="img-fluid">
+              <h4>Fácil de usar</h4>
+              <p>
+                A Pyvest vai além do básico e permite que você faça controles incríveis, essenciais para suas finanças. Simples como tem que ser!
+              </p>
+            </div>
+            <div class="col-md-4">
+              <img src="{% static 'images/economize.png' %}"  class="img-fluid">
+              <h4>Economize seu tempo</h4>
+              <p>
+                Tempo é dinheiro! Em segundos, você tem tudo sob controle e aproveite seu tempo com o que realmente importa pra você!
+              </p>
+            </div>
+            <div class="col-md-4">
+              <img src="{% static 'images/suporte.png' %}"  class="img-fluid">
+              <h4>Suporte amigo</h4>
+              <p>
+                Dúvidas? Perguntas? Nosso suporte super legal ajuda você! A gente tá aqui pra resolver seus problemas e deixar sua vida bem mais fácil!
+              </p>
+            </div>
+          </div>
+        </div>
+      </section><!--/FIM seção recursos -->
+
     </main>
 
+    <footer class="text-info badge-success ">
+      <div class="container badge-success">
+          <div class="row">
+              <div class="col-md-3 col-lg-4 col-xl-3">
+                  <h5>EDA</h5>
+                  <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
+                  <p class="mb-0">
+                    EDA 2020/01
+                  </p>
+              </div>
     
+              <div class="col-md-2 col-lg-2 col-xl-2 mx-auto">
+                  <h5>Sobre Nós</h5>
+                  <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
+                  <ul class="list-unstyled">
+                    <a href="" class="btn btn-outline-dark ml-2">
+                      <i class="fab fa-youtube"></i>
+                    </a>
+                      <li><a href="">Link 2</a></li>
+                      <li><a href="">Link 3</a></li>
+                      <li><a href="">Link 4</a></li>
+                  </ul>
+              </div>
+    
+              <div class="col-md-3 col-lg-2 col-xl-2 mx-auto">
+                  <h5>Outros links</h5>
+                  <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
+                  <ul class="list-unstyled">
+                    <a href="" class="btn btn-outline-dark">
+                      <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="" class="btn btn-outline-dark ml-2">
+                      <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="" class="btn btn-outline-dark ml-2">
+                      <i class="fab fa-instagram"></i>
+                    </a>
+                    
+                    
+                  </ul>
+              </div>
+    
+              <div class="col-md-4 col-lg-3 col-xl-3">
+                  <h5>Contacto</h5>
+                  <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
+                  <ul class="list-unstyled">
+                      <li><i class="fa fa-home mr-2"></i> EDA</li>
+                      <li><i class="fa fa-envelope mr-2"></i> python.investimentos@gmail.com</li>
+                      <li><i class="fa fa-phone mr-2"></i> + 33 12 14 15 16</li>
+                      <li><i class="fa fa-print mr-2"></i> + 33 12 14 15 16</li>
+                  </ul>
+              </div>
+              <div class="col-12 copyright mt-3">
+                  <p class="float-left">
+                      <a href="#">Back to top</a>
+                  </p>
+                  <p class="text-right text-muted">created with <i class="fa fa-heart"></i> by <a href="https://t-php.fr/43-theme-ecommerce-bootstrap-4.html"><i>EDA</i></a> | <span>v. 1.0</span></p>
+              </div>
+          </div>
+      </div>
+    </footer>
+ 
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   </body>
 </html>
