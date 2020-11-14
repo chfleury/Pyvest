@@ -125,7 +125,6 @@ class Pilha:
         self.top = node
         self._size += 1
         
-        # a gente 
         acoesSession.append({
             'symbol': node.symbol,
             'name' : node.name,

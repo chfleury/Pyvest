@@ -48,12 +48,21 @@ def fazerRequisicao(symbol, key):
     return price_for_chart1, price_for_chart2, price_for_chart3, change_for_chart1, change_for_chart2, change_for_chart3, market_for_chart1, market_for_chart2, market_for_chart3, symbol_min, symbol, symbol_max
 
 # Dados usado no gráfico    
-price_for_chart1, price_for_chart2, price_for_chart3, change_for_chart1, change_for_chart2, change_for_chart3, market_for_chart1, market_for_chart2, market_for_chart3, label_for_chart1, label_for_chart2, label_for_chart3 = fazerRequisicao('PETR4', '3eafa921')
-label_for_chart1 = json.dumps(label_for_chart1)
-label_for_chart2 = json.dumps(label_for_chart2)
-label_for_chart3 = json.dumps(label_for_chart3)
+#price_for_chart1, price_for_chart2, price_for_chart3, change_for_chart1, change_for_chart2, change_for_chart3, market_for_chart1, market_for_chart2, market_for_chart3, label_for_chart1, label_for_chart2, label_for_chart3 = fazerRequisicao('PETR4', '3eafa921')
+#label_for_chart1 = json.dumps(label_for_chart1)
+#label_for_chart2 = json.dumps(label_for_chart2)
+#label_for_chart3 = json.dumps(label_for_chart3)
 
-def products(request):
+def products(request, symbol):
+    print(symbol)
+
+    price_for_chart1, price_for_chart2, price_for_chart3, change_for_chart1, change_for_chart2, change_for_chart3, market_for_chart1, market_for_chart2, market_for_chart3, label_for_chart1, label_for_chart2, label_for_chart3 = fazerRequisicao(symbol, '3eafa921')
+    label_for_chart1 = json.dumps(label_for_chart1)
+    label_for_chart2 = json.dumps(label_for_chart2)
+    label_for_chart3 = json.dumps(label_for_chart3)
+
+
+    # fazerRequisicao()
     #renderiza o template com o contexto do dicionário dado, nesse caso é o 'context'
     return render(request, 'plot_chart/products.html', {
       'price_for_chart1': price_for_chart1,
