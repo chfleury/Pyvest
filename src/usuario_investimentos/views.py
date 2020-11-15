@@ -8,12 +8,12 @@ context = {}
 context['acoes'] = []
 class Node_Investimentos:
     #construtor
-    def __init__(self, symbol, name, price):
+    def __init__(self, symbol, name, price, idAcao):
         # guarda os dados
         self.symbol = symbol
         self.name = name
         self.price = price
-
+        self.idAcao = idAcao
         # guarda a referência (next item)
         self.next = None
 
@@ -34,14 +34,14 @@ class Linked_List_Investimentos:
             
         return current_node
     
-    def append(self, symbol, name, price):
+    def append(self, symbol, name, price, idAcao):
         if self.head:
             pointer = self.head
             while(pointer.next):
                 pointer = pointer.next
-            pointer.next = Node_Investimentos(symbol, name, price)
+            pointer.next = Node_Investimentos(symbol, name, price, idAcao)
         else:
-            self.head = Node_Investimentos(symbol, name, price)
+            self.head = Node_Investimentos(symbol, name, price, idAcao)
     
     def pop_search(self, name):
         pointer = self.head
@@ -60,7 +60,8 @@ class Linked_List_Investimentos:
             context['acoes'].append({
                     'name' : pointer.name, 
                     'symbol': pointer.symbol,
-                    'price': pointer.price
+                    'price': pointer.price,
+                    'id': pointer.idAcao
                     })
             pointer = pointer.next
 
@@ -68,7 +69,7 @@ class Linked_List_Investimentos:
         r = ""
         pointer = self.head
         while(pointer):
-            r = r + str(pointer.name) + "----" + str(pointer.symbol) + "->"
+            r = r + str(pointer.name) + "----" + str(pointer.idAcao) + "->"
             pointer = pointer.next
         r = r + "None"
         return r
@@ -78,28 +79,48 @@ class Linked_List_Investimentos:
             
 
 def meus_investimentos(request):
+    context['acoes'] = []
+    lista_investimentos = Linked_List_Investimentos()
+
+    userId = 0
+    if request.user.is_authenticated:
+      userId = request.user.id
+              
+    investimentos = Investimento.objects.all().filter(userId= userId)
+
+    for i in investimentos:
+        lista_investimentos.append(i.symbol, i.name, i.price, i.id)
+
+    lista_investimentos.load_context()
+    
+    #print(lista_investimentos)
+    
+    """ return products(request, "GGBR3") """
     if request.method == 'POST':
+        """ lista_investimentos.load_context() """
+
         x = request.POST.get('symbol')
-        print(x)
-        return products(request, x)
+        y = request.POST.get('id')
+        if x != None:
+          print(x)
+          return products(request, x)
+        else:
+            investimentos = Investimento.objects.all().filter(id= y).delete()
+        
+            context['acoes'] = []
+            lista_investimentos = Linked_List_Investimentos()
+                    
+            investimentos = Investimento.objects.all().filter(userId= userId)
+
+            for i in investimentos:
+                lista_investimentos.append(i.symbol, i.name, i.price, i.id)
+
+            lista_investimentos.load_context()
+
+            return render(request, 'investimentos_do_usuario.html', context)
     else:
-        context['acoes'] = []
-        lista_investimentos = Linked_List_Investimentos()
-
-        userId = 0
-        if request.user.is_authenticated:
-            userId = request.user.id
+      
             
-        investimentos = Investimento.objects.all().filter(userId= userId)
-
-        for i in investimentos:
-            lista_investimentos.append(i.symbol, i.name, i.price)
-
-        lista_investimentos.load_context()
-        
-        #print(lista_investimentos)
-        
-        """ return products(request, "GGBR3") """
-        
         return render(request, 'investimentos_do_usuario.html', context)
-
+  
+ 

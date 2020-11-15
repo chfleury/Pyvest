@@ -37,11 +37,11 @@ def Listacarrinho(request):
                 ).save()
             request.session['acoes'] = []
             print('-------------investiu------------------')
-            return render(request, 'index_carrinho.html', context )
+            return render(request, 'index_carrinho.html' )
         elif request.POST.get('excluir') == 'excluir':
             request.session['acoes'] = []
             print('-------------excluiu------------------')
-            return render(request, 'index_carrinho.html', context )
+            return render(request, 'index_carrinho.html')
         return render(request, 'index_carrinho.html', context )
     else: 
         return render(request, 'index_carrinho.html', context )

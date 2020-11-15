@@ -2,6 +2,7 @@ from django.shortcuts import render
 import json
 from .models import Plot_Chart
 import requests
+from carrinho.models import Investimento
 
 # Requisição feita na API
 def fazerRequisicao(symbol, key):
@@ -54,6 +55,8 @@ def fazerRequisicao(symbol, key):
 #label_for_chart3 = json.dumps(label_for_chart3)
 
 def products(request, symbol):
+ 
+      
     print(symbol)
 
     price_for_chart1, price_for_chart2, price_for_chart3, change_for_chart1, change_for_chart2, change_for_chart3, market_for_chart1, market_for_chart2, market_for_chart3, label_for_chart1, label_for_chart2, label_for_chart3 = fazerRequisicao(symbol, '3eafa921')

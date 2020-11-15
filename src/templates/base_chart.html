@@ -37,21 +37,12 @@
     </nav>      
     
     <div class="titulo ml-2">
-      <h3>{{ acao.name }}</h3>
+      <h3>Nome da ação</h3>
       <div class="código ml-auto">
-            <h4>Símbolo = {{ acao.symbol }}</h4>
+            <h4>Símbolo = símbolo da ação</h4>
       </div>
     </div>
     
-    
-    
-
-    <! -- Botões superiores relacionados ao histórico do investimento -->
-    <!-- <div class="btn-group ml-2" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-success">Últimos 3 dias</button>
-      <button type="button" class="btn btn-success">Últimos 7 dias</button>
-      <button type="button" class="btn btn-success">Últimos 20 dias</button>
-    </div> -->
     {% block content %}
     
     {% endblock %}
@@ -59,14 +50,6 @@
     {% block scripts %}
 
     {% endblock %}
-
-    <! -- Botões inferiores -->
-    <div class="btn-group ml-2" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-danger">Remover Investimento</button>
-    </div> 
-    <div class="btn-group ml-2" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-danger">voltar</button>
-    </div>    
 
 
     <script src="{% static 'static/js/bootstrap.js' %}"></script>

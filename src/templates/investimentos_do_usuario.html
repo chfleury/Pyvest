@@ -40,14 +40,41 @@
     
     
      <!-- Lista de botões dos investimentos do usuário -->
-    {% for acao in acoes %}
+    <!-- {% for acao in acoes %}
       <form method="POST" action="/meus_investimentos/">
         {% csrf_token %}
-        <input type="hidden" name="symbol" value={{ acao.symbol }}>
-        <button type="submit" class="btn btn-success">{{ acao.name }}</button>
+        <input type="hidden" name="symbol" value={{ acao.symbol}}>
+        <input type="hidden" name="id" value={{ acao.id }}>
+
+        <button type="submit" class="btn btn-success mx-auto" style= "max-width: 100%;">{{ acao.name }}</button>
       </form>
       <p></p>
+    {% endfor %} -->
+
+    {% for acao in acoes %}
+
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+              <div class="btn-group mr-2" role="group" aria-label="First group">
+                <form method="POST" action="/meus_investimentos/">
+                  {% csrf_token %}
+                  <input type="hidden" name="symbol" value={{ acao.symbol}}>
+                  <button type="submit" class="btn btn-success">{{ acao.name }}</button>
+                </form>
+
+                <form method="POST" action="/meus_investimentos/">
+                  {% csrf_token %}
+                  <input type="hidden" name="id" value={{ acao.id }}>
+                  <button type="submit" class="btn btn-danger"> Excluir </button>
+                </form>
+
+              </div>
+            </div>
+      <p></p>
     {% endfor %}
+
+
+
+
 
       <!-- <div class="list-group ml-5 mr-5 mb-2">
         
