@@ -196,18 +196,13 @@ def busca(request):
         userId = request.user.id
     else:
         return redirect('/entrar') 
-
-    acoesSession = request.session['acoes']
+    acoesSession = []
     carrinho_temp = Pilha()
 
     try:
         # ta funcionando
-        # 
-
-        print('---------------------')
-        print(request.session['acoes'])
-        print('---------------------')
-
+        #   
+        acoesSession = request.session['acoes']
     except:
         print('erro')
   
@@ -256,7 +251,12 @@ def busca(request):
                 contextDesfazer['acoes'] = context['acoes']
                 contextDesfazer['desfeito'] = True
                 
-                l = request.session['acoes']
+                l = []
+                try:
+                    l = request.session['acoes']
+
+                except:
+                    print('erro')
 
                 for i in l:
                     carrinho_temp.push(
@@ -304,7 +304,12 @@ def busca(request):
                         request.POST.get('change_percent'),
                         request.POST.get('updated_at')
                     )
-                    l = request.session['acoes']
+                    l = []
+                    try:
+                        l = request.session['acoes']
+
+                    except:
+                        print('erro')
                     request.session['acoes'] = carrinho_temp.listar() + l
      
                     return render(request, path, contextCarrinho)
