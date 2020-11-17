@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from carrinho.models import Investimento
 from plot_chart.views import products
 
@@ -79,12 +79,16 @@ class Linked_List_Investimentos:
             
 
 def meus_investimentos(request):
+  
     context['acoes'] = []
     lista_investimentos = Linked_List_Investimentos()
 
     userId = 0
     if request.user.is_authenticated:
-      userId = request.user.id
+        userId = request.user.id
+    else:
+        print('redicisadmsaks')
+        return redirect('/entrar') 
               
     investimentos = Investimento.objects.all().filter(userId= userId)
 
@@ -101,9 +105,10 @@ def meus_investimentos(request):
 
         x = request.POST.get('symbol')
         y = request.POST.get('id')
+        n = request.POST.get('name')
         if x != None:
           print(x)
-          return products(request, x)
+          return products(request, x, n)
         else:
             investimentos = Investimento.objects.all().filter(id= y).delete()
         

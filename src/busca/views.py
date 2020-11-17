@@ -82,14 +82,12 @@ def request_api(symbolList, key):
     for i in symbolList:
         url = f'https://api.hgbrasil.com/finance/stock_price?key={key}&symbol={i}'
 
-        print(url)
         dados = requests.get(url)
         test = json.loads(dados.text)
         # esse price ja ta no test a gente ja manda ele pra listaDados pode
         # price = test['results'][i]['market_cap']
         listaDados.append(test['results'][i])
-        print(listaDados)
-        print('-----------------------')
+  
     return listaDados
 
 
@@ -110,7 +108,6 @@ class NodePilha:
         self.updated_at = updated_at
         self.next = None
 
-acoesSession = []
 class Pilha:
     #construtor
     def __init__(self):
@@ -119,65 +116,49 @@ class Pilha:
     
     
     #insere um elemento na pilha
-    def push(self, request, symbol, name, region, currency, time_open, time_close, timezone, market_cap, price, change_percent, updated_at):
-        node = NodePilha(symbol, name, region, currency, time_open, time_close, timezone, market_cap, price, change_percent, updated_at)
-        node.next = self.top
-        self.top = node
-        self._size += 1
+    def push(self, symbol, name, region, currency, time_open, time_close, timezone, market_cap, price, change_percent, updated_at):
+        if self.top:
+            q = NodePilha(symbol, name, region, currency, time_open, time_close, timezone, market_cap, price, change_percent, updated_at)
+            node = self.top
+            while(node.next):
+                node = node.next
+            node.next = q
+        else:
+            node = NodePilha(symbol, name, region, currency, time_open, time_close, timezone, market_cap, price, change_percent, updated_at)
+            node.next = self.top
+            self.top = node
+            self._size += 1
         
-        acoesSession.append({
-            'symbol': node.symbol,
-            'name' : node.name,
-            'region' : node.region,
-            'currency' : node.currency,
-            'time_open' : node.open,
-            'time_close' : node.close,
-            'timezone' : node.timezone,
-            'market_cap' : node.market_cap,
-            'price' : node.price,
-            'change_percent' : node.change_percent,
-            'updated_at' : node.updated_at})
-        
-        # acoesSession[-1]['symbol'] = node.symbol
-        # acoesSession[-1]['name'] = node.name
-        # acoesSession[-1]['region'] = node.region
-        # acoesSession[-1]['currency'] = node.currency
-        # acoesSession[-1]['time_open'] = node.open
-        # acoesSession[-1]['time_close'] = node.close
-        # acoesSession[-1]['timezone'] = node.timezone
-        # acoesSession[-1]['market_cap'] = node.market_cap
-        # acoesSession[-1]['price'] = node.price
-        # acoesSession[-1]['change_percent'] = node.change_percent
-        # acoesSession[-1]['updated_at'] = node.updated_at
-        
-        request.session['acoes'] = acoesSession
-        # for attr, value in node.__dict__.items():
-        #     acoesSession[-1][attr] = value
+    def listar(self):
+        lista = []
+        if self.top:
+            pointer = self.top
+            while(pointer):
+                lista.append({
+                'symbol': pointer.symbol,
+                'name' : pointer.name,
+                'region' : pointer.region,
+                'currency' : pointer.currency,
+                'time_open' : pointer.open,
+                'time_close' : pointer.close,
+                'timezone' : pointer.timezone,
+                'market_cap' : pointer.market_cap,
+                'price' : pointer.price,
+                'change_percent' : pointer.change_percent,
+                'updated_at' : pointer.updated_at})
+                pointer = pointer.next
+            return lista
+        return []
 
-        # too pensando
-        # agr tem q ver se ta la mesmo armazenado
-        # acoesSession.append(json.dumps(node))
-        # la na parte da busca
-
-        # request.session['acoes'] = acoesSession
-        request.session['testes'] = [{'teste1': 14}, {'teste':12}]
-        #pera ai vou ver no site como e q esqueci ss
-        # nao da pra botar nosso node direto na session parece
-        # tem que ser uma lista de dicionarios
-        #sei nem o q é isso,
-        # na hora de inserir o node na session
-    
    #remove o elemento do topo da pilha
-    def pop(self, request):
-        if self._size > 0:
+    def pop(self):
+        if self.top:
             node = self.top
             self.top = node.next
             node.next = None
             self._size -= 1
-            # roda ai gayzao
-            acoesSession.pop()
-            request.session['acoes'] = acoesSession
-
+            
+         
             return node
         #bora tentar so o push primeiro
         
@@ -207,11 +188,18 @@ class Pilha:
     def __str__(self):
         return self.__repr__()
 
-carrinho_temp = Pilha()
 
 context = {}
 
 def busca(request):
+    if request.user.is_authenticated:
+        userId = request.user.id
+    else:
+        return redirect('/entrar') 
+
+    acoesSession = request.session['acoes']
+    carrinho_temp = Pilha()
+
     try:
         # ta funcionando
         # 
@@ -222,11 +210,14 @@ def busca(request):
 
     except:
         print('erro')
-    #botei pra printar  bora rodar agr
+  
+    print('Carrinho:')
+    print(carrinho_temp)
 
+    print('Acoes session')
+    print(acoesSession)
     path = os.path.join(
       '..', 'templates', 'busca.html')
-    print(carrinho_temp)
 
     if request.method == 'POST':
         busca = request.POST.get('busca')
@@ -251,7 +242,7 @@ def busca(request):
 
             symbolList = set(hash_table[key].search(busca))
 
-            context['acoes'] = request_api(symbolList, '34a625c3')
+            context['acoes'] = request_api(symbolList, '0d9862ec')
             return render(request, path, context)
         else:
         # Caso contrário, ele ainda pode ter ou adicionado ao carrinho,
@@ -264,56 +255,62 @@ def busca(request):
                 contextDesfazer = {}
                 contextDesfazer['acoes'] = context['acoes']
                 contextDesfazer['desfeito'] = True
-                carrinho_temp.pop(request)
-                print(carrinho_temp)
+                
+                l = request.session['acoes']
+
+                for i in l:
+                    carrinho_temp.push(
+                        i['symbol'],
+                        i['name'],
+                        i['region'],
+                        i['currency'],
+                        i['time_open'],
+                        i['time_close'],
+                        i['timezone'],
+                        i['market_cap'],
+                        i['price'],
+                        i['change_percent'],
+                        i['updated_at'])
+#
+                carrinho_temp.pop()
+                
+                request.session['acoes'] = carrinho_temp.listar()
+
                 return render(request, path, contextDesfazer)
 
             else:
             # Caso ele não tenha desfeito, significa que esse POST
             # foi utilizado para adicionar uma ação ao carrinho (Caso 3)
             # temporário, o que é feito a seguir
-                contextCarrinho = {}
-                contextCarrinho['acoes'] = context['acoes']
-                contextCarrinho['snack'] = True
-                
-                # pega os respectivos valores e utiliza como parametro
-                carrinho_temp.push(
-                    request,
-                    request.POST.get('symbol'),
-                    request.POST.get('name'),
-                    request.POST.get('region'),
-                    request.POST.get('currency'),
-                    request.POST.get('open'),
-                    request.POST.get('close'),
-                    request.POST.get('timezone'),
-                    request.POST.get('market_cap'),
-                    request.POST.get('price'),
-                    request.POST.get('change_percent'),
-                    request.POST.get('updated_at')
-                )
-                '''
-                acao = {} 
-                acao['market_time'] = {}
-                acao['symbol'] = request.POST.get('symbol'),
-                acao['name'] = request.POST.get('name'),
-                acao['region'] = request.POST.get('region'),
-                acao['currency'] = request.POST.get('currency'),
-                acao['market_time']['open'] = request.POST.get('open'),
-                acao['market_time']['close'] = request.POST.get('close'),
-                acao['market_time']['timezone'] = request.POST.get('timezone'),
-                acao['market_cap'] = request.POST.get('market_cap'),
-                acao['price'] = request.POST.get('price'),
-                acao['change_percent'] = request.POST.get('change_percent'),
-                acao['updated_at'] = request.POST.get('updated_at'),
-                
-                print(acao)
-                #TODO: alterar...
-                carrinho_temp.push(acao)
-                '''
-                print(carrinho_temp)
+                adicionar = request.POST.get('adicionar')
 
-                #print(contextCarrinho)
-                return render(request, path, contextCarrinho)
+                if adicionar is not None and adicionar:
+
+                    contextCarrinho = {}
+                    contextCarrinho['acoes'] = context['acoes']
+                    contextCarrinho['snack'] = True
+                    
+                    # pega os respectivos valores e utiliza como parametro
+                    carrinho_temp.push(
+                        request.POST.get('symbol'),
+                        request.POST.get('name'),
+                        request.POST.get('region'),
+                        request.POST.get('currency'),
+                        request.POST.get('open'),
+                        request.POST.get('close'),
+                        request.POST.get('timezone'),
+                        request.POST.get('market_cap'),
+                        request.POST.get('price'),
+                        request.POST.get('change_percent'),
+                        request.POST.get('updated_at')
+                    )
+                    l = request.session['acoes']
+                    request.session['acoes'] = carrinho_temp.listar() + l
+     
+                    return render(request, path, contextCarrinho)
+                else:
+                    return render(request, path)
+
     else:
         return render(request, path)
 # TODO:fazer com que o contextCarrinho seja passado tbm para essa funcao

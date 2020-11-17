@@ -54,8 +54,11 @@ def fazerRequisicao(symbol, key):
 #label_for_chart2 = json.dumps(label_for_chart2)
 #label_for_chart3 = json.dumps(label_for_chart3)
 
-def products(request, symbol):
- 
+def products(request, symbol, name):
+    if request.user.is_authenticated:
+        userId = request.user.id
+    else:
+        return redirect('/entrar') 
       
     print(symbol)
 
@@ -80,4 +83,5 @@ def products(request, symbol):
       'label_for_chart1': label_for_chart1,
       'label_for_chart2': label_for_chart2,
       'label_for_chart3': label_for_chart3,
+      'acao': {'symbol': symbol, 'name': name}
     })

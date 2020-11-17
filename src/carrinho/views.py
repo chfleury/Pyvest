@@ -1,7 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import Investimento
 
 def Listacarrinho(request):
+    if request.user.is_authenticated:
+        userId = request.user.id
+    else:
+        return redirect('/entrar') 
+
     context ={}
     try:
         listaInvestimentos = []

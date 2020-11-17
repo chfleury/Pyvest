@@ -7,11 +7,9 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     
   </head>
-  <body>
-    
-    <! -- Barra de navegação -->
+  <body>    
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a href="/home" class="navbar-brand">
+      <a href="/busca" class="navbar-brand">
         <img id="logo" src="../static/images/logo_cortado.png" alt="Logo"
       /></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,7 +19,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="/home">Página Inicial<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/busca">Busca<span class="sr-only">(current)</span></a>
           </li>
           </li>
           <li class="nav-item">
@@ -58,6 +56,7 @@
                 <form method="POST" action="/meus_investimentos/">
                   {% csrf_token %}
                   <input type="hidden" name="symbol" value={{ acao.symbol}}>
+                  <input type="hidden" name="name" value={{ acao.name}}>
                   <button type="submit" class="btn btn-success">{{ acao.name }}</button>
                 </form>
 

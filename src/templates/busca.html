@@ -1,367 +1,120 @@
-<!doctype html>
 {% load static %}
-<html lang="pt-br">
-
+<html>
 <head>
-<script src="{% static 'js/bootstrap.min.js' %}"></script>
-<link href="main.css" rel="stylesheet" id="bootstrap-css">
-<link href="static/css/main.css" rel="stylesheet" type="text/css">
-<script src="static/css/main.css"></script>
-<script src="main.css"></script>
-<link rel="stylesheet" href="{% static 'css/main.css' %}">
-<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
 <link rel="stylesheet" href="{% static 'fa/css/all.min.css' %}">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<link rel="stylesheet" href="main.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="../static/css/busca.css" />
 
+<!-- <script src="{% static 'js/bootstrap.min.js' %}"></script> -->
 </head>
+
+
 <body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a href="/busca" class="navbar-brand">
+      <img id="logo" src="../static/images/logo_cortado.png" alt="Logo"
+    /></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
-        
-    <div class="container">
-        <a class="navbar-brand" href="index.html">PYTHON INVESTIMENTOS</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
-            <ul class="navbar-nav active">
-                <li class="nav-item m-auto">
-                    <a class="nav-link active" href="/home">HOME</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/meus_investimentos">MEUS INVESTIMENTOS</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/registrar">CADASTRE-SE</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link " href="/sobre"> <i class="fas fa-info-circle"></i> <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href=>LOGOUT</a>
-                </li>
-            </ul>
-
-           <!--  <form action="/busca" method="POST">
-                {% csrf_token %}
-                <label for="busca"> Busca:</label>
-                <input type="text" id="busca" name="busca"><br><br>
-                <input type="submit" value="Pesquisar">
-            </form>
-            -->
-        <div class="form-group ml-2">
-            <form action="/busca" method="POST">
-                {% csrf_token %}
-                <label for="busca"> </label>
-                <div class="input-group input-group-sm">
-                    <input type="text" id="busca" name="busca" aria-label="Small" aria-describedby="inputGroup-sizing-xl" placeholder="Search...">
-                    <div class="input-group-append">
-                        <button type="submit" class="btn btn-secondary btn-number">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        </div>
-                <a class="btn btn-success btn-sm ml-2" href="/carrinho">
-                    <i class="fa fa-shopping-cart"></i> Carrinho
-                    <span class="badge badge-light">6</span>
-                </a>
-          
-    </div>
-
-   
-</nav>
-
-<section id="back">
-    <div class="jumbotron">
-        <div class="container">
-            <div class="row">
-          <div class="col-md-6">  
-              <h1 class="jumbotron-heading"></h1><img class="imagem" src="{% static 'images/python_investimentos_logo.png' %}" height="200" > </h1>
-          </div>
-          <div class="col-md-6">
-            <h1 class="jumbotron-heading"></h1><img class="imagem" src="{% static 'images/finance.jpeg' %}" height="200" > </h1>
-          </div>  
-        </div>
-        </div>
-    </div>
-
-{% block content %}
-
-    
-{% if desfeito %}
-<div id="snackbar">
-  <p>AÇÃO DESFEITA</p>
-</div> 
-
-<script>showSnackbar()</script>
-{% endif %}
-
-    
- <!-- <form action="/busca" method="POST">
-        {% csrf_token %}
-        <label for="busca"> Busca:</label>
-        <input type="text" id="busca" name="busca"><br><br>
-        <input type="submit" value="Pesquisar">
-   </form>
--->   
-    <!-- <button class="btn btn-lg" 
-    onclick="showSnackbar()"> 
- Show Snackbar 
-</button>  -->
-    <main>
-      <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col"> </th>
-                    <th scope="col">Productos</th>
-                    <th scope="col">Código</th>
-                    <th scope="col" class="text-right">Preço</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-           
-            <tbody>  
-                {% for acao in acoes %}     
-              <tr>
-                <td><img src="https://dummyimage.com/50x50/28e01b/fff" /> </td>
-                <td>{{acao.name}}</td>
-                <td>{{acao.symbol}}</td>
-                <td class="text-right">R${{acao.price}}</td>
-                <td class="add-carrinho-div">
-          
-                    <form id="add-carrinho" action="/busca" method="POST" >
-                      {% csrf_token %}
-                      <input type="hidden" name="symbol" value="{{acao.symbol}}">
-                      <input type="hidden" name="name" value="{{acao.name}}">
-                      <input type="hidden" name="region" value="{{acao.region}}">
-                      <input type="hidden" name="currency" value="{{acao.currency}}">
-                      <input type="hidden" name="open" value="{{acao.market_time.open}}">
-                      <input type="hidden" name="close" value="{{acao.market_time.close}}">
-                      <input type="hidden" name="timezone" value="{{acao.market_time.timezone}}">
-                      <input type="hidden" name="market_cap" value="{{acao.market_cap}}">
-                      <input type="hidden" name="price" value="{{acao.price}}">
-                      <input type="hidden" name="change_percent" value="{{acao.change_percent}}">
-                      <input type="hidden" name="updated_at" value="{{acao.updated_at}}">
-                      <input class="btn btn-success" type="submit" value="Adicionar ao carrinho">
-                    </form>
-              
-                </td>
-               <!-- <td class="btn btn-lg btn-block btn-success text-uppercase">ADICIONAR AO CARRINHO</td> -->
-                <td class="text-right"><button class="btn btn-sm btn-success"><i class="fa fa-shopping-cart"></i> </button> </td>
-            </tr>  
-            {% endfor %}
-            <tr>
-                <td></td>
-                <td></td>
-                <td>SUBTOTAL</td>
-                <td class="text-right">255,90 REAIS</td>
-                <td></td>
-                <td></td>
-                
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td>DESCONTO</td>
-                <td class="text-right">6,90 REAIS</td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td><strong>TOTAL</strong></td>
-                <td class="text-right"><strong>346,90 REAIS</strong></td>
-                <td></td>
-                <td></td>
-                <td></td> </td>
-            </tr>       
-            </tbody>
-          
-          </table>
-
-      </div>
-
-      <!-- <form action="/busca/redirect" method="GET">
-            <Button type ="submit" formmethod="GET">Ir para o carrinho</Button>
-          </form>
-        -->
-
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/sobre">Sobre nós</a>
+        </li>
       
-        <div class="col mb-2">
-            <div class="row">
-                <div class="col-sm-12  col-md-6">
-                    <script src="../static/js/busca.js"></script> 
+        </li>
+        <!-- <li class="nav-item active"> -->
+        <li class="nav-item">
+          <a class="nav-link" href="/carrinho">Carrinho</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/meus_investimentos/">Meus investimentos<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/">Sair</a>
+        </li>
+      </ul>
+    </div>
+  </nav>    
 
-             
+    <script src="../static/js/busca.js"></script> 
 
+<div class="content">
     {% if snack %}
-      <div id="snackbar col-md-6  ">
-      
-        <form action="/busca" method="POST">
-          {% csrf_token %}
-          <input type="hidden" name="desfazer" value="true">
-          <input type="submit" class="btn btn-lg btn-block btn-success text-uppercase" value="Desfazer">
-        </form>
-        <p>Ação adicionada ao carrinho</p>
-        
-      </div> 
-      <script>showSnackbar()</script>
-    {% endif %}
-
-    
-                </div>
-               <div class="col-sm-12 col-md-6 text-right">
-                <form action="/busca/redirect" method="GET">
-                 <button type="submit"  formmethod="GET"  class="btn btn-lg btn-block btn-success text-uppercase">IR PARA O CARRINHO</button>
-                </form>
-             </div>
-          </div>
-        </div>
-     
-   
-    </main>
-</section>
-   <!-- <div class="add-carrinho-div">
-          
-      <form id="add-carrinho" action="/busca" method="POST" >
+    <div id="snackbar">
+      <p>Ação adicionada ao carrinho</p>
+      <form action="/busca" method="POST">
         {% csrf_token %}
-        <input type="hidden" name="symbol" value="{{acao.symbol}}">
-        <input type="hidden" name="name" value="{{acao.name}}">
-        <input type="hidden" name="region" value="{{acao.region}}">
-        <input type="hidden" name="currency" value="{{acao.currency}}">
-        <input type="hidden" name="open" value="{{acao.market_time.open}}">
-        <input type="hidden" name="close" value="{{acao.market_time.close}}">
-        <input type="hidden" name="timezone" value="{{acao.market_time.timezone}}">
-        <input type="hidden" name="market_cap" value="{{acao.market_cap}}">
-        <input type="hidden" name="price" value="{{acao.price}}">
-        <input type="hidden" name="change_percent" value="{{acao.change_percent}}">
-        <input type="hidden" name="updated_at" value="{{acao.updated_at}}">
-        <input type="submit" value="Adicionar ao carrinho">
+        <input type="hidden" name="desfazer" value="true">
+        <input type="submit" value="Desfazer">
       </form>
+      
+    </div> 
+    <script>showSnackbar()</script>
+  {% endif %}
 
-    </div>      -->
-    {% endblock content %}
+  {% if desfeito %}
+  <div id="snackbar">
+    <p>Ação desfeita</p>
+  </div> 
 
-  <!--  <form action="/busca/redirect" method="GET">
-      <Button type ="submit" formmethod="GET">Ir para o carrinho</Button>
-    </form>
--->
+  <script>showSnackbar()</script>
+  {% endif %}
 
-<section class="">
-    <div class="container align-self-center"><!--container -->
-        <div class="row"><!--row -->
-          <div class="col-md-12 capa">
-            
-            <h1>pyvest</h1>
-            <a href="" class="btn btn-lg btn-custom btn-roxo">
-              pyvest
-            </a>
-
-            <a href="" class="btn btn-lg btn-custom btn-branco">
-              pyvest
-            </a>
-            <h1>pyvest</h1>
-            <a href="" class="btn btn-lg btn-custom btn-roxo">
-              pyvest
-            </a>
-
-            <a href="" class="btn btn-lg btn-custom btn-branco">
-             pyvest
-            </a>
-            <h1>pyvest</h1>
-            <a href="" class="btn btn-lg btn-custom btn-roxo">
-              pyvest
-            </a>
-
-            <a href="" class="btn btn-lg btn-custom btn-branco">
-             pyvest
-            </a>
-            
-
-          </div>
-        </div><!--/row -->
+  <form id = "busca" action="/busca" method="POST">
+      {% csrf_token %}
+      <div class="campo">
+        <label for="busca"> Busca:</label>
+        <input type="text" id="busca" name="busca">
       </div>
+      
+      <input id= "pesquisar-button" type="submit" value="Pesquisar">
+  </form>
 
-</section>
 
-    <!-- Footer -->
-    <footer class="text-info badge-success ">
-        <div class="container badge-success">
-            <div class="row">
-                <div class="col-md-3 col-lg-4 col-xl-3">
-                    <h5>EDA</h5>
-                    <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
-                    <p class="mb-0">
-                      EDA 2020/01
-                    </p>
-                </div>
-      
-                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto">
-                    <h5>Sobre Nós</h5>
-                    <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
-                    <ul class="list-unstyled">
-                      <a href="" class="btn btn-outline-dark ml-2">
-                        <i class="fab fa-youtube"></i>
-                      </a>
-                        <li><a href="">Link 2</a></li>
-                        <li><a href="">Link 3</a></li>
-                        <li><a href="">Link 4</a></li>
-                    </ul>
-                </div>
-      
-                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto">
-                    <h5>Outros links</h5>
-                    <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
-                    <ul class="list-unstyled">
-                      <a href="" class="btn btn-outline-dark">
-                        <i class="fab fa-facebook"></i>
-                      </a>
-                      <a href="" class="btn btn-outline-dark ml-2">
-                        <i class="fab fa-twitter"></i>
-                      </a>
-                      <a href="" class="btn btn-outline-dark ml-2">
-                        <i class="fab fa-instagram"></i>
-                      </a>
-                      
-                      
-                    </ul>
-                </div>
-      
-                <div class="col-md-4 col-lg-3 col-xl-3">
-                    <h5>Contacto</h5>
-                    <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
-                    <ul class="list-unstyled">
-                        <li><i class="fa fa-home mr-2"></i> EDA</li>
-                        <li><i class="fa fa-envelope mr-2"></i> python.investimentos@gmail.com</li>
-                        <li><i class="fa fa-phone mr-2"></i> + 33 12 14 15 16</li>
-                        <li><i class="fa fa-print mr-2"></i> + 33 12 14 15 16</li>
-                    </ul>
-                </div>
-                <div class="col-12 copyright mt-3">
-                    <p class="float-left">
-                        <a href="#">Back to top</a>
-                    </p>
-                    <p class="text-right text-muted">created with <i class="fa fa-heart"></i> by <a href="https://t-php.fr/43-theme-ecommerce-bootstrap-4.html"><i>EDA</i></a> | <span>v. 1.0</span></p>
-                </div>
-            </div>
-        </div>
-      </footer>
+  <main>
+    {% for acao in acoes %}
+    <div class="info-acao">
+      <div class="informacao">
+        <h2>{{acao.name}} </h2>
+        <p>Símbolo: {{acao.symbol}}</p>
+        <p>Preço: R${{acao.price}}</p>
+  
+      </div>
     
-      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
- </body>
+      <div class="add-carrinho-div">
+        
+        <form  class="login-form" id="add-carrinho" action="/busca" method="POST" >
+          {% csrf_token %}
+          <input type="hidden" name="symbol" value="{{acao.symbol}}">
+          <input type="hidden" name="name" value="{{acao.name}}">
+          <input type="hidden" name="region" value="{{acao.region}}">
+          <input type="hidden" name="currency" value="{{acao.currency}}">
+          <input type="hidden" name="open" value="{{acao.market_time.open}}">
+          <input type="hidden" name="close" value="{{acao.market_time.close}}">
+          <input type="hidden" name="timezone" value="{{acao.market_time.timezone}}">
+          <input type="hidden" name="market_cap" value="{{acao.market_cap}}">
+          <input type="hidden" name="price" value="{{acao.price}}">
+          <input type="hidden" name="change_percent" value="{{acao.change_percent}}">
+          <input type="hidden" name="updated_at" value="{{acao.updated_at}}">
+          <input type="hidden" name="adicionar" value="true">
+          <input id = "adicionar-button" type="submit" value="Adicionar ao carrinho">
+        </form>
+
+      </div>
+      
+
+    </div>
+    {% endfor %}
+  </main>
+  <!-- <form action="/busca/redirect" method="GET">
+    <Button type ="submit" formmethod="GET">Ir para o carrinho</Button>
+  </form> -->
+
+</div>
+   
+</body>
 
 </html>
-
-
-
