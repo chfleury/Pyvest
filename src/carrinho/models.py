@@ -14,3 +14,6 @@ class Investimento(models.Model):
     changePercent = models.FloatField()
     data = models.CharField(max_length = 100)
     userId = models.IntegerField(default= 0)
+
+    def __str__(self):
+        return [self.name,self.symbol]
