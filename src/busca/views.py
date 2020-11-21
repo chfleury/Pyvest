@@ -6,58 +6,18 @@ import requests
 import json 
 import os
 
-class Node:
-    def __init__(self, name, key):
-        self.name = name
-        self.key = key
-        self.next = None
+from eda.HashTable import *
+from eda.Pilha import *
 
 hash_table = []
 
 # Lista formada por nodes de palavras e chaves de cada ação
-class LinkedList:
-    def __init__(self):
-        self.head = None
-        
-
-    def append(self, word, key):
-        if self.head:
-            pointer = self.head
-            while(pointer.next):
-                pointer = pointer.next
-            pointer.next = Node(word, key)
-        else:
-            self.head = Node(word, key)
-    
-    def __repr__(self):
-        r = ""
-        pointer = self.head
-        while(pointer):
-            r = r + str(pointer.name) + "----" + str(pointer.key) + "->"
-            pointer = pointer.next
-        r = r + "None"
-        return r
-
-    def __str__(self):
-        return self.__repr__()
-    
-
-    def search(self, palavra):
-        lista = []
-        pointer = self.head
-        while(pointer):
-            if palavra.lower() in pointer.name.lower():
-                lista.append(pointer.key)
-                print(pointer.key)
-            pointer = pointer.next
-        return lista
-
 
 # Retornará o índice em que a palavra deve ser colocada dentro da hashtable
 def get_key(palavra):
     return ord(palavra[0].lower()) - 97
-
 # Inicia os valores da lista com o objeto LinkedList
+
 def hash_init():
     for i in range(23):
         hash_table.append(LinkedList())
@@ -84,110 +44,9 @@ def request_api(symbolList, key):
 
         dados = requests.get(url)
         test = json.loads(dados.text)
-        # esse price ja ta no test a gente ja manda ele pra listaDados pode
-        # price = test['results'][i]['market_cap']
         listaDados.append(test['results'][i])
   
     return listaDados
-
-
-#TODO: fazer o carrinho pilha
-#joga aqui pae
-class NodePilha:
-    def __init__(self, symbol, name, region, currency, time_open, time_close, timezone, market_cap, price, change_percent, updated_at):
-        self.symbol = symbol
-        self.name = name
-        self.region = region
-        self.currency = currency
-        self.open = time_open
-        self.close = time_close
-        self.timezone = timezone
-        self.market_cap = market_cap
-        self.price = price
-        self.change_percent = change_percent
-        self.updated_at = updated_at
-        self.next = None
-
-class Pilha:
-    #construtor
-    def __init__(self):
-        self.top = None
-        self._size = 0
-    
-    
-    #insere um elemento na pilha
-    def push(self, symbol, name, region, currency, time_open, time_close, timezone, market_cap, price, change_percent, updated_at):
-        if self.top:
-            q = NodePilha(symbol, name, region, currency, time_open, time_close, timezone, market_cap, price, change_percent, updated_at)
-            node = self.top
-            while(node.next):
-                node = node.next
-            node.next = q
-        else:
-            node = NodePilha(symbol, name, region, currency, time_open, time_close, timezone, market_cap, price, change_percent, updated_at)
-            node.next = self.top
-            self.top = node
-            self._size += 1
-        
-    def listar(self):
-        lista = []
-        if self.top:
-            pointer = self.top
-            while(pointer):
-                lista.append({
-                'symbol': pointer.symbol,
-                'name' : pointer.name,
-                'region' : pointer.region,
-                'currency' : pointer.currency,
-                'time_open' : pointer.open,
-                'time_close' : pointer.close,
-                'timezone' : pointer.timezone,
-                'market_cap' : pointer.market_cap,
-                'price' : pointer.price,
-                'change_percent' : pointer.change_percent,
-                'updated_at' : pointer.updated_at})
-                pointer = pointer.next
-            return lista
-        return []
-
-   #remove o elemento do topo da pilha
-    def pop(self):
-        if self.top:
-            node = self.top
-            self.top = node.next
-            node.next = None
-            self._size -= 1
-            
-         
-            return node
-        #bora tentar so o push primeiro
-        
-        raise IndexError("a pilha esta vazia")
-    
-    
-    #retorna o topo sem remover
-    def peek(self):
-        if self._size > 0:
-            return self.top.data
-        raise IndexError("a pilha esta vazia")
-
-    
-    # retorna o tamanha da lista
-    def __len__(self):
-        return self._size
-    
-    #representação de como enxergar a pilha 
-    def __repr__(self):
-        r = ""
-        pointer = self.top
-        while(pointer):
-            r = r +str(pointer.name) + "\n"
-            pointer = pointer.next
-        return r
-
-    def __str__(self):
-        return self.__repr__()
-
 
 context = {}
 
@@ -200,8 +59,6 @@ def busca(request):
     carrinho_temp = Pilha()
 
     try:
-        # ta funcionando
-        #   
         acoesSession = request.session['acoes']
     except:
         print('erro')
@@ -318,7 +175,6 @@ def busca(request):
 
     else:
         return render(request, path)
-# TODO:fazer com que o contextCarrinho seja passado tbm para essa funcao
 
 def redirectcarrinho(request):
     if request.method == 'GET':
