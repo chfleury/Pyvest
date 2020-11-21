@@ -61,7 +61,7 @@ def busca(request):
     try:
         acoesSession = request.session['acoes']
     except:
-        print('erro')
+        acoesSession = []
   
     print('Carrinho:')
     print(carrinho_temp)
@@ -113,7 +113,7 @@ def busca(request):
                     l = request.session['acoes']
 
                 except:
-                    print('erro')
+                    l = []
 
                 for i in l:
                     carrinho_temp.push(
@@ -144,7 +144,11 @@ def busca(request):
                 if adicionar is not None and adicionar:
 
                     contextCarrinho = {}
-                    contextCarrinho['acoes'] = context['acoes']
+                    try:
+                        contextCarrinho['acoes'] = context['acoes']
+                    except:
+                        contextCarrinho['acoes'] = []
+
                     contextCarrinho['snack'] = True
                     
                     # pega os respectivos valores e utiliza como parametro
@@ -166,7 +170,7 @@ def busca(request):
                         l = request.session['acoes']
 
                     except:
-                        print('erro')
+                        l = []
                     request.session['acoes'] = carrinho_temp.listar() + l
      
                     return render(request, path, contextCarrinho)
