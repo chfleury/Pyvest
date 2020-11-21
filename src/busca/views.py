@@ -183,6 +183,3 @@ def busca(request):
 def redirectcarrinho(request):
     if request.method == 'GET':
         return redirect('/carrinho')
-
-
-

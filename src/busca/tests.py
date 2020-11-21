@@ -3,6 +3,7 @@ from django.urls import reverse
 from busca import views
 from django.contrib.auth import login
 from django.contrib.auth.models import User
+import os
 
 class TestBusca(TestCase):
     def setUp(self) -> None:
@@ -24,7 +25,9 @@ class TestBusca(TestCase):
         response = self.clientLogado.get('/busca')
 
         self.assertEquals(response.status_code, 200)
-        self.assertTemplateUsed(response, '..\\templates\\busca.html') 
+        path = os.path.join('..', 'templates', 'busca.html')
+
+        self.assertTemplateUsed(response, path) 
 
     def test_POST_buscar(self):
         response = self.clientLogado.post('/busca', data={'busca': 'cielo'}, format='json')
@@ -66,3 +69,4 @@ class TestBusca(TestCase):
         response = self.clientLogado.post('/busca', data={'desfazer': True}, format='json')
 
         self.assertEqual(response.status_code, 200)
+        
