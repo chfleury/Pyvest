@@ -4,7 +4,7 @@ from busca import views
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 
-class TestRegistrar(TestCase):
+class TestBusca(TestCase):
     def setUp(self) -> None:
         self.client = Client()
         self.clientLogado = Client()
