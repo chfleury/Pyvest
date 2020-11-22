@@ -80,6 +80,9 @@ def busca(request):
 
         # Nesse if verificamos se ele tentou fazer busca ou não
         if busca is not None:
+            if not busca:
+                return render(request, path)
+
         # Caso ele tenha feito uma busca, executamos o códico da busca (Caso 1)
             acoes = get_stock()
             
