@@ -63,11 +63,11 @@ def busca(request):
     except:
         acoesSession = []
   
-    print('Carrinho:')
-    print(carrinho_temp)
+    """ print('Carrinho:') """
+    """ print(carrinho_temp) """
 
-    print('Acoes session')
-    print(acoesSession)
+    """ print('Acoes session')
+    print(acoesSession) """
     path = os.path.join(
       '..', 'templates', 'busca.html')
 
@@ -92,7 +92,7 @@ def busca(request):
             key = get_key(busca)
 
             if key > 22:
-                print("Nenhum valor com esta letra.")
+                """ print("Nenhum valor com esta letra.") """
                 return render(request, path, {})
 
             symbolList = set(hash_table[key].search(busca))

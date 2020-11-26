@@ -7,7 +7,8 @@ class TestRegistrar(TestCase):
     def setUp(self) -> None:
         self.username = 'user'
         self.password = 'plataforma123'
-
+    
+    #Teste para Registrar um usuario no Banco
     def test_registrar_form(self):
         response = self.client.post(reverse(views.registrar), data={
             'username': self.username,
@@ -17,7 +18,7 @@ class TestRegistrar(TestCase):
 
         users = get_user_model().objects.all()
         self.assertEqual(users.count(), 1)
-
+    #Teste para Entrar com um usuario existente no banco
     def test_entrar(self):
         response = self.client.post(reverse(views.registrar), data={
             'username': self.username,

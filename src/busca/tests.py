@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 import os
 
 class TestBusca(TestCase):
+    # Método Para logar um Usuário
     def setUp(self) -> None:
         self.client = Client()
         self.clientLogado = Client()
@@ -16,11 +17,12 @@ class TestBusca(TestCase):
 
         logged_in = self.clientLogado.login(username='testuser', password='12345')
 
-
+    # Método para verificar se o usuário não logado foi redirecionado
     def test_GET(self):
         response = self.client.get('/busca', follow= True) 
         self.assertRedirects(response, '/entrar')
-
+    
+    # Método para verificar se o usuário está logado foi redirecionado para a mesma pagina 
     def test_GET_logado(self):        
         response = self.clientLogado.get('/busca')
 
@@ -28,12 +30,14 @@ class TestBusca(TestCase):
         path = os.path.join('..', 'templates', 'busca.html')
 
         self.assertTemplateUsed(response, path) 
-
+    
+    # Método para teste De uma Busca simples na hashTable
     def test_POST_buscar(self):
         response = self.clientLogado.post('/busca', data={'busca': 'cielo'}, format='json')
 
         self.assertEqual(response.status_code, 200)
-
+        
+    # Método para verificar se o cicero é gay kkkkkkkkk
     def test_POST_adicionar(self):
         response = self.clientLogado.post('/busca', data={
                         'adicionar': True,
@@ -50,7 +54,8 @@ class TestBusca(TestCase):
                         'updated_at': '12/01/2020'}, format='json')
                         
         self.assertEqual(response.status_code, 200)
-      
+    
+    #Método para verificar se uma acao foi desfeita
     def test_POST_desfazer(self):
         response = self.clientLogado.post('/busca', data={
                         'adicionar': True,
