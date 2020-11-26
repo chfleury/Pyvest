@@ -20,10 +20,7 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="/sobre">Sobre nós</a>
-        </li>
-      
+        
         </li>
         <!-- <li class="nav-item active"> -->
         <li class="nav-item">
@@ -33,7 +30,11 @@
           <a class="nav-link" href="/meus_investimentos/">Meus investimentos<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/">Sair</a>
+            <form id = "sair" method="GET">
+                  {% csrf_token %}
+                  <a type="submit" class="nav-link" href ="/busca/entrar"> Sair </a>
+            </form>
+          
         </li>
       </ul>
     </div>
@@ -109,9 +110,6 @@
     </div>
     {% endfor %}
   </main>
-  <!-- <form action="/busca/redirect" method="GET">
-    <Button type ="submit" formmethod="GET">Ir para o carrinho</Button>
-  </form> -->
 
 </div>
    

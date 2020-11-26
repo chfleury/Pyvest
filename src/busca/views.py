@@ -5,7 +5,9 @@ from django.http import HttpResponse
 import requests 
 import json 
 import os
-
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
 from eda.HashTable import *
 from eda.Pilha import *
 
@@ -63,11 +65,6 @@ def busca(request):
     except:
         acoesSession = []
   
-    """ print('Carrinho:') """
-    """ print(carrinho_temp) """
-
-    """ print('Acoes session')
-    print(acoesSession) """
     path = os.path.join(
       '..', 'templates', 'busca.html')
 
@@ -186,3 +183,10 @@ def busca(request):
 def redirectcarrinho(request):
     if request.method == 'GET':
         return redirect('/carrinho')
+
+def logout_view(request):
+    if request.user.is_authenticated:
+        logout(request)    
+        
+    return redirect('/home')
+

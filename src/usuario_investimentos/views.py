@@ -27,11 +27,7 @@ def meus_investimentos(request):
         
     context['acoes'] = lista_investimentos.load_context()
     
-    #print(lista_investimentos)
-    
-    """ return products(request, "GGBR3") """
     if request.method == 'POST':
-        """ lista_investimentos.load_context() """
 
         x = request.POST.get('symbol')
         y = request.POST.get('id')

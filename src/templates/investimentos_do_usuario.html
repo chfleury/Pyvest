@@ -23,32 +23,20 @@
             <a class="nav-link" href="/busca">Busca<span class="sr-only">(current)</span></a>
           </li>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/sobre">Sobre nós</a>
-          </li>
-          <!-- <li class="nav-item active"> -->
+          
           <li class="nav-item">
             <a class="nav-link" href="/carrinho">Carrinho</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/">Sair</a>
-          </li>
+          <form id = "sair" method="GET">
+            {% csrf_token %}
+            
+            <a type="submit" class="nav-link" href ="/meus_investimentos/entrar"> Sair </a>
+          </form>
         </ul>
       </div>
     </nav>    
     
     
-     <!-- Lista de botões dos investimentos do usuário -->
-    <!-- {% for acao in acoes %}
-      <form method="POST" action="/meus_investimentos/">
-        {% csrf_token %}
-        <input type="hidden" name="symbol" value={{ acao.symbol}}>
-        <input type="hidden" name="id" value={{ acao.id }}>
-
-        <button type="submit" class="btn btn-success mx-auto" style= "max-width: 100%;">{{ acao.name }}</button>
-      </form>
-      <p></p>
-    {% endfor %} -->
 
     {% for acao in acoes %}
 
@@ -71,39 +59,6 @@
             </div>
       <p></p>
     {% endfor %}
-
-
-
-
-
-      <!-- <div class="list-group ml-5 mr-5 mb-2">
-        
-        <button value="{{ acao.name }}"   type="submit" class="list-group-item list-group-item-action">
-          <div class="código ml-auto">
-            {{ acao.name }}
-          </div>
-          <div class="nome mr-auto">
-              <h4>{{ acao.symbol }} <span class="badge badge-warning mr-auto">{{ acao.price }}</span></h4>
-          </div>
-      </div> -->
-    
-    <!-- <div class="list-group ml-5 mr-5 mb-2">
-      <a href="grafico" class="list-group-item list-group-item-action">
-        <div class="código ml-auto">
-          {{ acao.name }}
-        </div>
-        <div class="nome mr-auto">
-            <h4>{{ acao.symbol }} <span class="badge badge-warning mr-auto">{{ acao.price }}</span></h4>
-        </div>
-      </a>
-    </div> -->
-
-
-
-
-
-
-
   
     <script src="{% static 'static/js/bootstrap.js' %}"></script>
   </body>

@@ -25,18 +25,16 @@
             <a class="nav-link" href="/busca">Busca<span class="sr-only">(current)</span></a>
           </li>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/sobre">Sobre nós</a>
-          </li>
           <li class="nav-item active">
             <a class="nav-link" href="http://127.0.0.1:8000/meus_investimentos/">Meus Investimentos</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/carrinho">Carrinho</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/entrar">Sair</a>
-          </li>
+          <form id = "sair" method="GET">
+            {% csrf_token %}
+            <a type="submit" class="nav-link" href ="/meus_investimentos/grafico/entrar"> Sair </a>
+          </form>
         </ul>
       </div>
     </nav>      

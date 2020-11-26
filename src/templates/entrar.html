@@ -31,19 +31,9 @@
         Sua plataforma intuitiva de investimentos.
       </h1>
     </div>
-    <!-- {% for usuario in usuarios %}
-    <div><p>{{usuario.nome}}</p></div>
-    {% endfor %} -->
+
   </header>
   <main>
-    <!-- <form method="POST" action="/login">
-      <div class="login-form">
-        {% csrf_token %} {{form}}
-        <input type="submit" type="Login" value="Entrar" id="login-button" />
-      </div>
-    </form> -->
-
-    <!--     <form action="/entrar" id="login" method="POST">-->
     <form id="login" method="POST">
       {% csrf_token %}
       <div class="login-form">
@@ -62,10 +52,5 @@
       <p>Ainda não possui uma conta?</p>
       <a href="./registrar">Registre-se!</a>
     </div>
-    <!-- {% for o in teste %}
-    <tr class="{% cycle 'row1' rowvalue2 'row3' %}">
-      ...
-    </tr>
-    {% endfor %} -->
   </main>
 </html>

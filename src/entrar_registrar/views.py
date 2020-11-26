@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 
@@ -25,10 +25,6 @@ def entrar(request):
         return render(request, '../templates/entrar.html', context)
 
 
-# def teste(request):
-#       return redirect('/')
-
-
 def registrar(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -42,3 +38,5 @@ def registrar(request):
     else:
         form = UserCreationForm()
     return render(request, '../templates/registrar.html', {'form': form})
+
+
