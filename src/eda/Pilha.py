@@ -22,6 +22,7 @@ class Pilha:
     
     #insere um elemento na pilha
     # O(N)
+    # Adicionado ao final da pilha
     def push(self, symbol, name, region, currency, time_open, time_close, timezone, market_cap, price, change_percent, updated_at):
         if self.top:
             q = NodePilha(symbol, name, region, currency, time_open, time_close, timezone, market_cap, price, change_percent, updated_at)

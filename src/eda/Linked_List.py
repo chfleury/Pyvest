@@ -27,6 +27,7 @@ class Linked_List_Investimentos:
         return current_node
     
     # O(N)
+    # Adicionado ao final da lista
     def append(self, symbol, name, price, idAcao):
         if self.head:
             pointer = self.head
@@ -60,6 +61,8 @@ class Linked_List_Investimentos:
                     })
             pointer = pointer.next
         return context
+
+
     def __repr__(self):
         r = ""
         pointer = self.head
@@ -68,6 +71,7 @@ class Linked_List_Investimentos:
             pointer = pointer.next
         r = r + "None"
         return r
+        
      
     def __str__(self):
         return self.__repr__()

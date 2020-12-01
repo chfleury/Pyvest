@@ -9,6 +9,7 @@ class LinkedList:
         self.head = None
         
     # O(1)
+    # Cada item com nome e key é adicionado no início da lista em cada posição
     def append(self, word, key):
         if self.head:
             pointer = Node(word, key)
@@ -30,7 +31,8 @@ class LinkedList:
     def __str__(self):
         return self.__repr__()
     
-    # O(N)
+    # O(N) no pior dos casos - Palavra pesquisada ser a última da lista
+    # O(1) melhor dos casos - Palavra pesquisada ser a primeira da lista
     def search(self, palavra):
         lista = []
         pointer = self.head
