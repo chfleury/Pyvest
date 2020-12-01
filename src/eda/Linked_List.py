@@ -26,6 +26,7 @@ class Linked_List_Investimentos:
             
         return current_node
     
+    # O(N)
     def append(self, symbol, name, price, idAcao):
         if self.head:
             pointer = self.head
@@ -46,6 +47,7 @@ class Linked_List_Investimentos:
         # 1 2 3
         # |---|
 
+    # O(N)
     def load_context(self):
         pointer = self.head
         context = []

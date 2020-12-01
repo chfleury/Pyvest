@@ -8,7 +8,7 @@ class LinkedList:
     def __init__(self):
         self.head = None
         
-
+    # O(1)
     def append(self, word, key):
         if self.head:
             pointer = Node(word, key)
@@ -30,7 +30,7 @@ class LinkedList:
     def __str__(self):
         return self.__repr__()
     
-
+    # O(N)
     def search(self, palavra):
         lista = []
         pointer = self.head
@@ -41,4 +41,3 @@ class LinkedList:
             pointer = pointer.next
         return lista
 
-# é so isso manos, ai importa ela, comenta a outra lá e vê se dá bom

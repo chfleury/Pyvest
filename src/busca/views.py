@@ -34,6 +34,7 @@ def get_stock():
 # Carrega a hash table
 def load_hash(acoes):
     row = 0
+    # O(N) - Quantidade de ações
     for i in acoes:
         key = get_key(acoes[row][0])
         hash_table[key].append(acoes[row][0], acoes[row][1])

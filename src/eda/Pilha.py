@@ -21,6 +21,7 @@ class Pilha:
     
     
     #insere um elemento na pilha
+    # O(N)
     def push(self, symbol, name, region, currency, time_open, time_close, timezone, market_cap, price, change_percent, updated_at):
         if self.top:
             q = NodePilha(symbol, name, region, currency, time_open, time_close, timezone, market_cap, price, change_percent, updated_at)
@@ -33,7 +34,8 @@ class Pilha:
             node.next = self.top
             self.top = node
             self._size += 1
-        
+    
+    # O(N)
     def listar(self):
         lista = []
         if self.top:
@@ -56,6 +58,7 @@ class Pilha:
         return []
 
    #remove o elemento do topo da pilha
+    # O(1)
     def pop(self):
         if self.top:
             node = self.top
@@ -65,7 +68,6 @@ class Pilha:
             
          
             return node
-        #bora tentar so o push primeiro
         
         raise IndexError("a pilha esta vazia")
     
