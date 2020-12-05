@@ -37,7 +37,7 @@ main h1 span {
 
 .integrantes .integrante {
   width: 80vw;
-  border-bottom: 1px solid var(--logo);
+  /* border-bottom: 1px solid var(--logo); */
 }
 
 .integrantes .integrante strong {
@@ -55,8 +55,10 @@ main h1 span {
 
 .integrantes .integrante p {
   /* color: var(--color-text-complement); */
+  height: 13rem;
   padding-bottom: 0.8rem;
   font-family: Poppins;
+  border-bottom: 4px solid var(--logo);
 }
 
 footer {
@@ -110,14 +112,12 @@ footer p {
   }
 
   .integrantes .integrante strong {
-    display:block;
+    display: block;
   }
 
   main .integrantes .integrante {
     width: 26vw;
     margin: auto;
-
-    border-bottom: 3px solid var(--logo);
   }
 
   main .integrantes .integrante img {
@@ -150,7 +150,7 @@ footer p {
 }
 
 @media (min-width: 1080) {
-  .integrantes .integrante strong {  
+  .integrantes .integrante strong {
     display: inline;
   }
 }
