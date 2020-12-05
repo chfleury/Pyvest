@@ -172,7 +172,7 @@ def busca(request):
 
                     except:
                         l = []
-                    request.session['acoes'] = carrinho_temp.listar() + l
+                    request.session['acoes'] = l + carrinho_temp.listar()
      
                     return render(request, path, contextCarrinho)
                 else:
